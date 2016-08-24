@@ -25,17 +25,12 @@ ST-LINK/V2のファームウェアをアップデートする。
 
 NecleoをUSBポートに接続する。
 
-Keil５を入手する。
+keil μVersion5のダウンロード
 https://www.keil.com/download/product/
 
 MDK-ARMを選択する。
 ![MDK-ARM](../img/MDK-ARM.png)
 
-ユーザー登録する。
-![UserReg](../img/userTmp.png)
-
-firmwareアップグレードkeil μVersion5のダウンロード
-  住所、名前などを登録してダウンロードする。
 keil5を起動。ターゲットとなるデバイスを選択する。
 下記のボタン（PackInstaller）を押します。
 ![InstallButton](../img/BoradPackInstall.jpg)
@@ -43,6 +38,9 @@ keil5を起動。ターゲットとなるデバイスを選択する。
 メニューバーのProjectを選択。次にSTmicroelectronics→STM32F401→STM32F401RB→STM32F401RBを選択します。
 必要となるコンポーネントを選択する。
 ![Ｋｅｉｌ設定画面](../img/Keil_Soc_Select.jpg)
+
+ユーザー登録する。 住所、名前などを登録してダウンロードする。
+![UserReg](../img/userTmp.png)
 
 ![InstallButton](../img/ManegerInstallButton.png)
 
