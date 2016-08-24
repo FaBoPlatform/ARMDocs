@@ -1,22 +1,9 @@
 
 * [はじめに](README.md)
 * 開発環境
-    * [Nucleo](/dev/nucleo.md)
-    開発者の登録
-
-    ST-LINK/V2ドライバインストール
-
-    NecleoをUSBポートに接続する。
-
-    firmwareアップグレード
-
-
-    * [Keil MDKの設定](/dev/keil.md)
-    keil μVersion5のダウンロード
-      住所、名前などを登録してダウンロードする。
-    keil5を起動。メニューバーのProjectを選択。次に
-    ![Ｋｅｉｌ設定画面](./img/Keil_Soc_Select.jpg)
-
+    * [Nucleo](./dev/nucleo.md)
+    * [Keil MDKの設定](./dev/keil.md)
+  
 * Analog Brick
 	* [#101 LED Brick](/brick_analog/101_brick_analog_led.md)
 	* [#102 Buzzer Brick](/brick_analog/102_brick_analog_buzzer.md)
