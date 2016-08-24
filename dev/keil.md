@@ -10,7 +10,7 @@ http://www.st.com/content/st_com/ja/products/embedded-software/development-tool-
 ![SoftwareGet](../img/SoftwareGet009.png)
 
 ST-LINK/V2ドライバインストール
-![SoftwareGet007](../img/GetSoftware.png)
+![SoftwareGet007](../img/GETSoftware.png)
 
 ST-LINK/V2のファームウェアをダウンロードする。
 https://my.st.com/content/my_st_com/en/products/embedded-software/development-tool-software/stsw-link007.html
@@ -23,9 +23,9 @@ NecleoをUSBポートに接続する。
 Keil５を入手する。
 https://www.keil.com/download/product/
 MDK-ARMを選択する。
-
+![MDK-ARM](../img/MDK-ARM.png)
 ユーザー登録する。
-
+![UserReg](../img/userTmp.png)
 
 firmwareアップグレードkeil μVersion5のダウンロード
   住所、名前などを登録してダウンロードする。
@@ -39,7 +39,7 @@ keil5を起動。ターゲットとなるデバイスを選択する。
 
 ![InstallButton](../img/ManegerInstallButton.png)
 
-上のBoardsタブを押して、その下のNUCLEO-F401RE（Rev.C）の下DeviceのSTM32F401RBを選択、左にある任意のInstallボタンします。
+上のBoardsタブを押して、その下のNUCLEO-F401RE（Rev.C）の下DevicesのSTM32F401RBを選択、左にある任意のInstallボタンします。
 ![DownloadButton](../img/BoardDownload.jpg)
 
 下記の示すOptionForTargetボタンを押します。
