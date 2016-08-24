@@ -16,19 +16,22 @@ keil5を起動。ターゲットとなるデバイスを選択する。
 
 ![InstallButton](../img/ManegerInstallButton.png)
 
-上のBoardタブを押して、下に移動しSTM32F401RB右に移動してインストールします。
+上のBoardsタブを押して、下に移動しSTM32F401RB右に移動してインストールします。
 ![DownloadButton](../img/BoardDownload.jpg)
 
+下記の示すOptionForTargetボタンを押します。
 ![OptionForTargetButton](../img/OptionForTarget.png)
 
+Targetタブをクリックし下記の通りにアドレス設定します。
 ![TargetConf](../img/TargetPhoto.png)
 
+Debugタブを押して、ST-Link Debuggerを選択。
 ![DebugerPhoto](../img/DebugerPhoto.png)
 
-![FlashDownload](../img/FlashDownload.png)
-
-![DebugerPhoto](../img/DebugerPhoto.png)
-
+下記の設定になっているか確認してください。相違があれば変更してください。
 ![Trace](../Trace.png)
+
+Flashタブを押して、下記の設定にしてください。ProgramingAlgorithmが下記と相違する場合は、必要に応じてAdd,Removeボタンで変更してください。
+![FlashDownload](../img/FlashDownload.png)
 
 ![ProgramingAlgorithm](../img/ProgramingAlgorithm.png)
