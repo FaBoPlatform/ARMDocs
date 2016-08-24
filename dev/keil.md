@@ -1,4 +1,5 @@
 ＡＲＭマイコン開発が盛んになりさまざまなツールがあります。mbed,Keil,IAR,Eclipseなどありますが、ここではKeilを使います。
+流れとしては、ドライバをインストール→Keilのインストール→ターゲットとなるボードの設定→必要なコンポーネントをインストール→書き込みの設定となります。
 開発者登録する。
 
 http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-f401re.html
