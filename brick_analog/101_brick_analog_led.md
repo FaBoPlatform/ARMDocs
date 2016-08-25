@@ -17,7 +17,7 @@ LEDのBrickです。発光色は5色（青・緑・赤・白・黄）ありま�
 ![](/img/100_analog/schematic/101_led.png)
 
 ## Sample Code
-A1コネクタにLED Brickを接続し、一定時間(1秒=1000ms)ごとに点灯/消灯（Lチカ）させています。
+A0コネクタにLED Brickを接続し、一定時間(1秒=1000ms)ごとに点灯/消灯（Lチカ）させています。
 
 ```c
 int main(void)
@@ -27,8 +27,10 @@ int main(void)
   MX_GPIO_Init();
   while (1)
   {
-		HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_0);
-		HAL_Delay(1000);
+    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_SET);
+	  HAL_Delay(1000);
+	  HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_RESET);
+	  HAL_Delay(1000);	
   }
 }
 ```
