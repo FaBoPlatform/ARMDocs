@@ -17,42 +17,49 @@
 
 ## Sample Code
 
-A0コネクタに接続したButton Brickの入力により、D2コネクタに接続したLED Brick の点灯/消灯を制御しています。
+A1コネクタに接続したButton Brickの入力により、A0コネクタに接続したLED Brick の点灯/消灯を制御しています。
+101_brick_analog_ledのソースコードを変えます。SM32CubeMXを再設定して、新たにPA1をGPIO_Inputに設定します。
 ```c
-//
-// FaBo Brick Sample
-//
-// #103 Button Brick
-//
+int main(void)
+{
 
-#define buttonPin A0 // ボタンピン
-#define ledPin 2     // LEDピン
+  /* USER CODE BEGIN 1 */
 
-// ボタンの押下状況取得用
-int buttonState = 0;
+  /* USER CODE END 1 */
 
-void setup() {
-  // ボタンピンを入力用に設定
-  pinMode(buttonPin, INPUT);
-  // LEDピンを出力用に設定
-  pinMode(ledPin, OUTPUT);
-}
+  /* MCU Configuration----------------------------------------------------------*/
 
-void loop(){
-  // ボタンの押下状況を取得
-  buttonState = digitalRead(buttonPin);
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
 
-  // ボタン押下判定
-  if (buttonState == HIGH) {
-    // ボタンが押された場合、LED点灯
-    digitalWrite(ledPin, HIGH);
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+
+  /* USER CODE BEGIN 2 */
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+  /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
+
+  if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_1)==GPIO_PIN_RESET){
+    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_SET);
+  }else{
+    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_RESET);
   }
-  else {
-    // LED消灯
-    digitalWrite(ledPin, LOW);
-  }
-}
+  /* USER CODE END 3 */
+
+
 ```
+書き込みに成功しましたら、リセットを押します。
 
 ## 構成Parts
 - 12mm角タクトスイッチ

@@ -21,8 +21,12 @@ A0コネクタにLED Brickを接続し、一定時間(1秒=1000ms)ごとに点�
 
 Ardunoなどとは違い、LEDを点滅するだけでも、たくさんの手続きを記述しなくてはいけないので、それで自動的にテンプレートを作成してくれるソフトウェアST32CubeMXを使用します。
 
-ST32CubeMXのインストール
+ST32CubeMXの入手先
 http://www.st.com/content/st_com/en/products/development-tools/software-development-tools/stm32-software-development-tools/stm32-configurators-and-code-generators/stm32cubemx.html
+
+ダウンロードしインストールします。
+![](../img/getSTM32Cube.png)
+
 
 ST32CubeMXの起動します。New Projectを選びます。
 ![](/img/ST32CubeTitle.png)
@@ -42,7 +46,7 @@ PA0を右クリックしてGPIO_OUTPUTにします。
 手間のかかる設定などは、自動設定され、プロジェクトのフォルダー群が生成されます。それに伴いコンポーネントやソースファイルがフォルダで分けられます。MDK-ARMフォルダをクリックします。また、sample_led.iocはSTM32CubeMXのファイルでGPIOなど追加したいとき再設定が可能です。
 ![](/img/foldergen.png)
 
-ARMでは不可欠となるSystemClock_Config（システムクロック設定）とvoid MX_GPIO_InitでＧＰＩＯの設定（入出力、プルアッププルダウン、ＧＰＩＯのクロック）など自動でコードが生成されます。（一部）
+ARMでは不可欠となるSystemClock_Config（システムクロック設定）とvoid MX_GPIO_Init(GPIO初期化)やＧＰＩＯの設定（入出力、プルアッププルダウン、ＧＰＩＯのクロック）など自動でコードが生成されます。（一部）
 
 ```c
 /** System Clock Configuration
@@ -108,10 +112,14 @@ static void MX_GPIO_Init(void)
 
 ```
 
-SM32CubeMXで生成された場合、フォルダは別フォルダにあります。
+OptionsforTagetボタンを押しC/C++タブで確認してみましょう。SM32CubeMXで生成された場合、インクルードパス（コンポーネント、ソースファイル）はプロジェクトファイルとは別フォルダにあります。プリプロセッサーシンボルが設定され、Optimization（最適化）は、最高レベルのLEVEL3に設定されていますが状況に合わせて調整し、MiscControlsはコンパイラに対する命令で、C言語の規格はC99となります。
+
 ![options](../img/OptionsforTagetC++.png)
 
-参照先のフォルダのパス
+
+参照先のフォルダ(インクルードパス)
+
+
 ![includepath](../img/includepath.png)
 
 
