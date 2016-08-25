@@ -1,13 +1,25 @@
-ＡＲＭマイコンをつかった開発が盛んになりmbed,Keil,IAR,Eclipseなど数多くの選択肢がありますが、Keilを使います。
+ＡＲＭマイコンを仕様した開発が盛んになり開発環境もmbed,Keil,IAR,GCC利用のEclipseなどいくつかの選択肢がありますが、今回はkeilで開発環境を構築します。mbedと異なりハードウェアに直接プログラミングでき、コードサイズがコンパクトになるベアメタルとなります。
 流れとしては、ドライバをインストール→Keilのインストール→ターゲットとなるボードの設定→必要なコンポーネントをインストール→書き込みの設定となります。
-開発者登録する。
+NUCLEO-F401RE導入の場合
+  主なスペック
+    Nucleo type:Nucleo64(High-performance)
+    MCU:STM32F401RET6(ARM 32bit Cortex-M4)
+    MCU pin:64
+    Flash:512KB
+    RAM:96KB
+    Interface:SPI,I2S,I2C,USART,USB-OTG,SDIO
+    GPIO:50
+    Connectors(Arduino UNO Rev3,ST morpho)
 
+開発者登録する。
 http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-f401re.html
 
 ![Top](../img/F401Top.png)
 
 
+
 ST-LINK/V2ドライバダウンロード
+
 http://www.st.com/content/st_com/ja/products/embedded-software/development-tool-software/stsw-link009.html
 
 ![SoftwareGet](../img/SoftwareGet009.png)
@@ -39,6 +51,12 @@ keil5を起動。ターゲットとなるデバイスを選択する。
 メニューバーのProjectを選択。次にSTmicroelectronics→STM32F401→STM32F401RB→STM32F401RBを選択します。
 必要となるコンポーネントを選択する。
 ![Ｋｅｉｌ設定画面](../img/Keil_Soc_Select.jpg)
+
+参考 ARM KEIL Board Support
+file:///C:/Keil_v5/ARM/PACK/Keil/MDK-Middleware/7.0.0/Doc/Board/html/index.html
+参考　CMSIS-CORE
+file:///C:/Keil_v5/ARM/PACK/ARM/CMSIS/5.0.0-Beta4/CMSIS/Documentation/Core/html/index.html
+
 
 ユーザー登録する。 住所、名前などを登録してダウンロードする。
 ![UserReg](../img/userTmp.png)

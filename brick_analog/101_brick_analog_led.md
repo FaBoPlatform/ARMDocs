@@ -11,34 +11,25 @@ LEDのBrickです。発光色は5色（青・緑・赤・白・黄）ありま�
 ## Connecting
 アナログコネクタ(A0〜A5)、またはデジタルコネクタ(2〜13)のいずれかに接続します。
 
-![](/img/100_analog/connect/101_led_connect.jpg)
+![ST32F4](../img/ST32F4_s001.jpg)
 
 ## Schematic
 ![](/img/100_analog/schematic/101_led.png)
 
 ## Sample Code
-D2コネクタにLED Brickを接続し、一定時間(1秒=1000ms)ごとに点灯/消灯（Lチカ）させています。
+A1コネクタにLED Brickを接続し、一定時間(1秒=1000ms)ごとに点灯/消灯（Lチカ）させています。
 
 ```c
-//
-// FaBo Brick Sample
-//
-// #101 LED Brick
-//
-
-#define ledPin 2 // LEDピン
-
-void setup() {
-  // LED接続ピンを出力に設定
-  pinMode(ledPin, OUTPUT);
-}
-
-void loop() {
-  // LEDを一定時間で点滅
-  digitalWrite(ledPin, HIGH);
-  delay(1000);
-  digitalWrite(ledPin, LOW);
-  delay(1000);
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
+  while (1)
+  {
+		HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_0);
+		HAL_Delay(1000);
+  }
 }
 ```
 
