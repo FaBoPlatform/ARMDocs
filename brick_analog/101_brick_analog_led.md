@@ -9,7 +9,7 @@ LEDのBrickです。発光色は5色（青・緑・赤・白・黄）ありま�
 ※購入時は色の間違いにご注意ください。
 
 ## Connecting
-アナログコネクタ(A0〜A5)、またはデジタルコネクタ(2〜13)のいずれかに接続します。
+アナログコネクタ(A0〜A5)、またはデジタルコネクタ(2〜13)のいずれかに接続します。（サンプルはA0に接続します。）
 
 ![ST32F4](../img/ST32F4_s001.jpg)
 
@@ -19,14 +19,15 @@ LEDのBrickです。発光色は5色（青・緑・赤・白・黄）ありま�
 ## Sample Code
 A0コネクタにLED Brickを接続し、一定時間(1秒=1000ms)ごとに点灯/消灯（Lチカ）させています。
 
-Ardunoなどとは違い、LEDを点滅するだけでも、たくさんの手続きを記述しなくてはいけないのでST32CubeMXを使用します。
+Ardunoなどとは違い、LEDを点滅するだけでも、たくさんの手続きを記述しなくてはいけないので、それで自動的にテンプレートを作成してくれるソフトウェアST32CubeMXを使用します。
 
-ST32のインストール
+ST32CubeMXのインストール
+http://www.st.com/content/st_com/en/products/development-tools/software-development-tools/stm32-software-development-tools/stm32-configurators-and-code-generators/stm32cubemx.html
 
-ST32CubeMXの起動
+ST32CubeMXの起動します。New Projectを選びます。
 ![](/img/ST32CubeTitle.png)
 
-ターゲットとなるボートを選びます。
+ターゲットとなるボートを選びます。BoardSelectorタブをクリックし、下記のように選び、OKを押します。
 ![](/img/BoardSelector.png)
 
 ArduinoピンのA0であるMCUのピンに対応するピンアサインはPA0になります。したがってGPIOAのピン０となります。
@@ -38,10 +39,11 @@ PA0を右クリックしてGPIO_OUTPUTにします。
 ![](/img/ST32CubePJSet.png)
 
 
-手間のかかる設定などは、自動設定されます。プロジェクトのフォルダー群が生成されます。MDK-ARMフォルダをクリックします。
+手間のかかる設定などは、自動設定され、プロジェクトのフォルダー群が生成されます。それに伴いコンポーネントやソースファイルがフォルダで分けられます。MDK-ARMフォルダをクリックします。また、sample_led.iocはSTM32CubeMXのファイルでGPIOなど追加したいとき再設定が可能です。
 ![](/img/foldergen.png)
 
-システムクロック設定とＧＰＩＯの設定など自動でコードが生成されます。（一部）
+ARMでは不可欠となるSystemClock_Config（システムクロック設定）とvoid MX_GPIO_InitでＧＰＩＯの設定（入出力、プルアッププルダウン、ＧＰＩＯのクロック）など自動でコードが生成されます。（一部）
+
 ```c
 /** System Clock Configuration
 */
@@ -105,7 +107,7 @@ static void MX_GPIO_Init(void)
 
 ```
 
-以上準備ができたので、while文の中身だけを記述。
+以上準備ができ、while文の中身だけを記述。 /* USER CODE BEGIN 3 */ と/* USER CODE BEGIN 3 */の間に記述するようにすると、あとでＳＴＭ32CubeＭXで変更されても、その中身は変更されない。
 
 ```c
 
@@ -116,10 +118,12 @@ int main(void)
   MX_GPIO_Init();
   while (1)
   {
+    /* USER CODE END WHILE */
     HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_SET);
 	  HAL_Delay(1000);
 	  HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_RESET);
 	  HAL_Delay(1000);
+     /* USER CODE BEGIN 3 */
   }
 }
 
@@ -137,7 +141,7 @@ Buildボタンをクリック。
 
 <sccess>![](../img/finish.png)
 
-リセットボタンを押すと起動します。
+リセットボタンを押すと起動します。Brick LEDが点滅したかどうか動作をご確認ください。
 
 ## 構成パーツParts
 - 5mm LED(各色)
