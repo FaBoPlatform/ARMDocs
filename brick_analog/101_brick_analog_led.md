@@ -126,13 +126,13 @@ int main(void)
 ```
 
 Buildボタンをクリック。
-<Build>![](../img/loadbuild0.jpg)
+<Build>![](../img/loadbuild0.png)
 
 Ｄｏｗｎｌｏａｄボタンをクリック。
-<download>![](../img/loadbuild1.jpg)
+<download>![](../img/loadbuild1.png)
 
 書き込みが成功すると。
-<sccess>![](../img/finish.jpg)
+<sccess>![](../img/finish.png)
 
 リセットボタンを押すと起動します。
 
