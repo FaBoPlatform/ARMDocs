@@ -30,15 +30,18 @@ ST32CubeMXの起動
 ![](/img/BoardSelector.png)
 
 ArduinoピンのA0であるMCUのピンに対応するピンアサインはPA0になります。したがってGPIOAのピン０となります。
+PA0を右クリックしてGPIO_OUTPUTにします。
 ![](/img/ST32CubeMX.png)
 
-使用しているIDEを選びます。
+
+使用しているIDEを選びます。任意のプロジェクト名を記入しMDK-ARM V5を選択。OKボタンをクリックします。
 ![](/img/ST32CubePJSet.png)
 
-手間のかかる設定など自動設定されプロジェクトのフォルダー群が生成されます。
+
+手間のかかる設定などは、自動設定されます。プロジェクトのフォルダー群が生成されます。MDK-ARMフォルダをクリックします。
 ![](/img/foldergen.png)
 
-システムクロック設定とＧＰＩＯの設定など自動でコードが生成される（一部）
+システムクロック設定とＧＰＩＯの設定など自動でコードが生成されます。（一部）
 ```c
 /** System Clock Configuration
 */
@@ -123,13 +126,13 @@ int main(void)
 ```
 
 Buildボタンをクリック。
-<Build>![](/img/loadbuild0.jpg)
+<Build>![](../img/loadbuild0.jpg)
 
 Ｄｏｗｎｌｏａｄボタンをクリック。
-<download>![](/img/loadbuild1.jpg)
+<download>![](../img/loadbuild1.jpg)
 
 書き込みが成功すると。
-<sccess>![](/img/finish.jpg)
+<sccess>![](../img/finish.jpg)
 
 リセットボタンを押すと起動します。
 
