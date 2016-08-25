@@ -106,10 +106,10 @@ static void MX_GPIO_Init(void)
 }
 
 SM32CubeMXで生成された場合、フォルダは別フォルダにあります。
-![](../img/OptionsforTagetC++.png)
+![options](../img/OptionsforTagetC++.png)
 
 参照先のフォルダのパス
-![](..)/img/includepath.png)
+![includepath](../img/includepath.png)
 
 
 ```
