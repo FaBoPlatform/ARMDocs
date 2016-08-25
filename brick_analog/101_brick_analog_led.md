@@ -105,6 +105,7 @@ static void MX_GPIO_Init(void)
 以上準備ができたので、while文の中身だけを記述。
 
 ```c
+
 int main(void)
 {
   HAL_Init();
@@ -118,7 +119,19 @@ int main(void)
 	  HAL_Delay(1000);
   }
 }
+
 ```
+
+Buildボタンをクリック。
+<Build>![](/img/loadbuild0.jpg)
+
+Ｄｏｗｎｌｏａｄボタンをクリック。
+<download>![](/img/loadbuild1.jpg)
+
+書き込みが成功すると。
+<sccess>![](/img/finish.jpg)
+
+リセットボタンを押すと起動します。
 
 ## 構成パーツParts
 - 5mm LED(各色)
