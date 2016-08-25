@@ -105,9 +105,16 @@ static void MX_GPIO_Init(void)
 
 }
 
+SM32CubeMXで生成された場合、フォルダは別フォルダにあります。
+![](../img/OptionsforTagetC++.png)
+
+参照先のフォルダのパス
+![](..)/img/includepath.png)
+
+
 ```
 
-以上準備ができ、while文の中身だけを記述。 /* USER CODE BEGIN 3 */ と/* USER CODE BEGIN 3 */の間に記述するようにすると、あとでＳＴＭ32CubeＭXで変更されても、その中身は変更されない。
+以上準備ができ、while文の中身だけを記述。 /* USER CODE BEGIN 3 */ と/* USER CODE BEGIN 3 */の間に記述するようにすると、あとでＳＴＭ32CubeＭXで変更されても、その中身は変更されません。
 
 ```c
 
