@@ -19,7 +19,7 @@ STM32CubeMXを起動してUART2を設定します。
 ![Cube](../img/USB304/UARTPinSet.png)
 
 115200bpsに設定がされているか確認します。
-![CubeConfig](../img/USB304/UARTConf(2).png)
+![CubeConfig](../img/USB304/UARTCONF.png)
 
 下記のコードMX_USART2_UART_Init関数が自動的に追加されます。必要に応じてボーレートを変更してください。
 
