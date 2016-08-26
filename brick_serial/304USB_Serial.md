@@ -11,6 +11,7 @@ Serialコネクタへ接続し、MicroUSBコネクタを他のデバイスに接
 
 
 ## Sample Code
+###受信のみ
 ArduonoピンD0,D1をRX,TXとして使うため、SB62,SB63をはんだします。（注意：NecleoボードのSTLINKは、シリアル通信ができるので、従来は不要です。）
 ![Cube](../img/USB304/solderSB62.jpg)
 
