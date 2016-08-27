@@ -19,9 +19,9 @@ LEDのBrickです。発光色は5色（青・緑・赤・白・黄）ありま�
 ## Sample Code
 A0コネクタにLED Brickを接続し、一定時間(1秒=1000ms)ごとに点灯/消灯（Lチカ）させています。
 
-Ardunoなどとは違い、LEDを点滅するだけでも、たくさんの手続きを記述しなくてはいけないので、それで自動的にテンプレートを作成してくれるソフトウェアST32CubeMXを使用します。
+Ardunoなどとは違い、LEDを点滅するだけでも、GPIOの初期化、クロック、タイマのクロックなどの、たくさんの手続きを記述しなくてはいけないので、自動的にテンプレートを作成してくれるソフトウェアSTM32CubeMXを使用します。それに伴い用意されるHALライブラリがインストールされます。
 
-ST32CubeMXの入手先
+STM32CubeMXの入手先
 http://www.st.com/content/st_com/en/products/development-tools/software-development-tools/stm32-software-development-tools/stm32-configurators-and-code-generators/stm32cubemx.html
 
 ダウンロードしインストールします。

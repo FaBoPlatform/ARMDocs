@@ -1,4 +1,4 @@
-ＡＲＭマイコンを仕様した開発が盛んになり開発環境もmbed,Keil,IAR,GCC利用のEclipseなどいくつかの選択肢がありますが、今回はkeilで開発環境を構築します。mbedと異なりハードウェアに直接プログラミングでき、コードサイズがコンパクトになるベアメタルとなります。
+ＡＲＭマイコンを仕様した開発が盛んになり開発環境もmbed,Keil,IAR,GCC利用のEclipseなどいくつかの選択肢がありますが、今回はkeilで開発環境を構築します。eclipseなどは、コンパイラなども別にインストール必要がありますが、keilでコンパイル可能です。特徴として、mbedと異なりハードウェアに直接プログラミングでき、性能の追及やコードサイズがコンパクトになるベアメタルとなります。
 流れとしては、ドライバをインストール→Keilのインストール→ターゲットとなるボードの設定→必要なコンポーネントをインストール→書き込みの設定となります。
 NUCLEO-F401RE導入の場合
   主なスペック
@@ -7,7 +7,8 @@ NUCLEO-F401RE導入の場合
     MCU pin:64
     Flash:512KB
     RAM:96KB
-    Interface:SPI,I2S,I2C,USART,USB-OTG,SDIO
+    Interface:SPI(3),I2S,I2C,USART(3),USB-OTG,SDIO(Secure Digital I/O)
+    WDT(2),ADC(12bit/10ch),RTC(Real Time Clock),TIM
     GPIO:50
     Connectors(Arduino UNO Rev3,ST morpho)
 
@@ -17,6 +18,7 @@ http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation
 ![Top](../img/F401Top.png)
 
 
+Necleoは、ファームウェアを書き込むST-LINKデバッガを搭載済みで完成したら切り離すことが可能になっており、別途購入不要です。
 
 ST-LINK/V2ドライバダウンロード
 
