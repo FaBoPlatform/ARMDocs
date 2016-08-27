@@ -1,0 +1,24 @@
+# #211 7Segment LED I2C Brick
+
+<center>![](/img/100_analog/product/117.jpg)
+<!--COLORME-->
+
+## Overview
+７セグメントLEDを使ったBrickです。
+
+I2Cで表示パターンを制御できます。
+
+## Connecting
+I2Cコネクタへ接続します。
+
+## Sample Code
+
+```c
+
+```
+
+## 構成Parts
+-7セグメントLED
+•Texas Instruments TLC59208F
+
+## GitHub

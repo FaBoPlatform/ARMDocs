@@ -70,6 +70,12 @@ int main(void)
 
 ```
 
+strlenを使用するので下記をコードに追記します。
+
+```c
+#include <stdio.h>
+#include <string.h>
+```
 Arduinoシールドのリセットボタンを押し、ターミナルソフトを起動し確認します。
 
 ## 構成Parts

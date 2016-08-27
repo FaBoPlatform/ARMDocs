@@ -19,16 +19,16 @@ LEDのBrickです。発光色は5色（青・緑・赤・白・黄）ありま�
 ## Sample Code
 A0コネクタにLED Brickを接続し、一定時間(1秒=1000ms)ごとに点灯/消灯（Lチカ）させています。
 
-Ardunoなどとは違い、LEDを点滅するだけでも、GPIOの初期化、クロック、タイマのクロックなどの、たくさんの手続きを記述しなくてはいけないので、自動的にテンプレートを作成してくれるソフトウェアSTM32CubeMXを使用します。それに伴い用意されるHALライブラリがインストールされます。
+汎用入出力であるGPIOを使ってLEDを点滅させます。Ardunoなどとは違い、LEDを点滅するだけでも、GPIOの初期化、クロック、タイマのクロックなどの、たくさんの手続きを記述しなくてはいけないので、自動的にテンプレートを作成してくれるソフトウェアSTM32CubeMXを使用します。それに伴いHALライブラリがインストールされます。
 
-STM32CubeMXの入手先
+コンフィグレーションアンドコードジェネレータSTM32CubeMXの入手先
 http://www.st.com/content/st_com/en/products/development-tools/software-development-tools/stm32-software-development-tools/stm32-configurators-and-code-generators/stm32cubemx.html
 
 ダウンロードしインストールします。
 ![](../img/getSTM32Cube.png)
 
 
-ST32CubeMXの起動します。New Projectを選びます。
+STM32CubeMXの起動します。New Projectを選びます。
 ![](/img/ST32CubeTitle.png)
 
 ターゲットとなるボートを選びます。BoardSelectorタブをクリックし、下記のように選び、OKを押します。
@@ -38,10 +38,13 @@ ArduinoピンのA0であるMCUのピンに対応するピンアサインはPA0�
 PA0を右クリックしてGPIO_OUTPUTにします。
 ![](/img/ST32CubeMX.png)
 
+GenerateCordeボタンをクリックします。
 
-使用しているIDEを選びます。任意のプロジェクト名を記入しMDK-ARM V5を選択。OKボタンをクリックします。
+使用しているIDEを選びます。任意のプロジェクト名を記入しMDK-ARM V5を選択。OKボタンをクリックします。HALライブラリが読み込まれます。しばらくすると、ダイヤログが表示されOpne Folderを選びます。
 ![](/img/ST32CubePJSet.png)
 
+参考～HALライブラリAPI Description of STM32F4xx HAL drivers
+http://www.st.com/content/ccc/resource/technical/document/user_manual/2f/71/ba/b8/75/54/47/cf/DM00105879.pdf/files/DM00105879.pdf/jcr:content/translations/en.DM00105879.pdf
 
 手間のかかる設定などは、自動設定され、プロジェクトのフォルダー群が生成されます。それに伴いコンポーネントやソースファイルがフォルダで分けられます。MDK-ARMフォルダをクリックします。また、sample_led.iocはSTM32CubeMXのファイルでGPIOなど追加したいとき再設定が可能です。
 ![](/img/foldergen.png)
@@ -125,7 +128,7 @@ OptionsforTagetボタンを押しC/C++タブで確認してみましょう。SM3
 
 
 
-以上準備ができ、while文の中身だけを記述。 /* USER CODE BEGIN 3 */ と/* USER CODE BEGIN 3 */の間に記述するようにすると、あとでＳＴＭ32CubeＭXで変更されても、その中身は変更されません。
+以上準備ができ、while文の中身だけを記述。 /* USER CODE BEGIN 3 */ と/* USER CODE END 3 */の間に記述するようにすると、あとでＳＴＭ32CubeＭXで変更されても、その中身は変更されません。
 
 ```c
 
@@ -147,11 +150,11 @@ int main(void)
 
 ```
 
-Buildボタンをクリック。
+Buildボタンをクリック。（ショートカットF7キー）
 
 <Build>![](../img/loadbuild0.png)
 
-Ｄｏｗｎｌｏａｄボタンをクリック。
+Ｄｏｗｎｌｏａｄボタンをクリック。（ショートカットF８キー）
 
 <download>![](../img/loadbuild1.png)
 
