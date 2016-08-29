@@ -49,6 +49,9 @@ http://www.st.com/content/ccc/resource/technical/document/user_manual/2f/71/ba/b
 手間のかかる設定などは、自動設定され、プロジェクトのフォルダー群が生成されます。それに伴いコンポーネントやソースファイルがフォルダで分けられます。MDK-ARMフォルダをクリックします。また、sample_led.iocはSTM32CubeMXのファイルでGPIOなど追加したいとき再設定が可能です。
 ![](/img/foldergen.png)
 
+プロジェクト名\Src\ディレクトリにmain.c（ユーザーが記入する）,stm32f4xx_hal_msp.c（コード生成によるMSP初期化）、stm32f4xx_it.c（割り込みの定義）の３つのファイルが作られます。
+
+
 ARMでは不可欠となるSystemClock_Config（システムクロック設定）とvoid MX_GPIO_Init(GPIO初期化)やＧＰＩＯの設定（入出力、プルアッププルダウン、ＧＰＩＯのクロック）など自動でコードが生成されます。（一部）
 
 ```c

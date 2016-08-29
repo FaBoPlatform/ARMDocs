@@ -12,10 +12,10 @@ Serialコネクタへ接続し、MicroUSBコネクタを他のデバイスに接
 
 ## Sample Code
 ###ボードから送信のみ
-ArduonoピンD0,D1をRX,TXとして使うため、SB62,SB63をはんだします。（注意：NecleoボードのSTLINKは、シリアル通信ができるので、従来は不要です。）
+ArduonoピンD0,D1をRX,TXとして使うため、SB62,SB63をはんだします。（注意：NecleoボードのSTLINKは、シリアル通信ができるので、Brickなしでもターミナルソフトで確認できます。従来は不要です。）
 ![Cube](../img/USB304/solderSB62.jpg)
 
-STM32CubeMXを起動してUART2を設定します。
+STM32CubeMXを起動してUART2を設定します。DisableからAnsynchrous（非同期）に変更します。
 ![Cube](../img/USB304/UARTPinSet.png)
 
 115200bpsに設定がされているか確認します。
@@ -76,11 +76,40 @@ strlenを使用するので下記をコードに追記します。
 #include <stdio.h>
 #include <string.h>
 ```
-Arduinoシールドのリセットボタンを押し、ターミナルソフトを起動し確認します。
+Arduinoシールドのリセットボタンを押し、USB304BrickをSerialにつなぎTeraTerm(Windows),(ターミナルスクリーンコマンド)Macなどのターミナルソフトを起動し確認します。（Brickなしでも、STM32F401とUSBでCOMポート接続でも確認できます。）
+
+##ボードに送受信をする。
+ボードにコマンドやデータを送ります。
+シリアル通信は１対１の通信なのでUART２とULINK側のボードと切り離すため、抵抗SB13,SB14の0Ω抵抗をはんだゴテで除去します。
+切り離すとパソコンのターミナルからシリアル通信はできなくなるので、#304 USB Brickは必須となります。
+
+上記のコードに以下のようにコードを変えます。
+
+```c
+
+int c;
+  while (1)
+  {
+  /* USER CODE END WHILE */
+		  if (HAL_UART_Receive(&huart2,(uint8_t *)&c,1,0xffff)==HAL_OK)
+			{
+					HAL_UART_Transmit(&huart2,(uint8_t *)&c,1,0xffff);
+			}
+
+  /* USER CODE BEGIN 3 */
+
+  }
+  /* USER CODE END 3 */
+
+}
+
+```
+
+今度はパソコンのターミナルとUSB Brickをつなぎ適切なCOMポートを選びます。
+上記のプログラムは、ターミナルソフトからキーボードが入力すると、その文字信号は、マイコンへ送信され、その文字がマイコンからパソコンへ返されます。（エコーバック）
+
 
 ## 構成Parts
-- スライドスイッチ
+-
 
 ## GitHub
-
-https://github.com/FaBoPlatform/FaBo/tree/master/117_slideswitch
