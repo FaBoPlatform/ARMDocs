@@ -116,14 +116,229 @@ UARTをAynchroutに設定し、ConfigurationボタンをクリックしてUART2 
 割り込みの設定をします。
 NVIC Settingを選び、USART2　global interrupt を　Enabledにします。
 
+するとmain.c以外にもstm32f4xx.it.cとｓｔｍ３２ｆ４ｘｘ_hal_map.cともにコードが自動的に追記されます。
+
 ![NVIC](../img/USB304/USART2_Configration.png)
 
-リングバッファのコード
+ｓｔｍ32f4xx.it.c(一部)
 
 ```c
 
+/**
+* @brief This function handles USART2 global interrupt.
+*/
+void USART2_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART2_IRQn 0 */
+
+  /* USER CODE END USART2_IRQn 0 */
+  HAL_UART_IRQHandler(&huart2);
+  /* USER CODE BEGIN USART2_IRQn 1 */
+
+  /* USER CODE END USART2_IRQn 1 */
+}
 
 ```
+
+stm32f4xx_hal_msp.c
+
+```c
+
+void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
+{
+
+  if(huart->Instance==USART2)
+  {
+  /* USER CODE BEGIN USART2_MspDeInit 0 */
+
+  /* USER CODE END USART2_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_USART2_CLK_DISABLE();
+
+    /**USART2 GPIO Configuration    
+    PA2     ------> USART2_TX
+    PA3     ------> USART2_RX
+    */
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2|GPIO_PIN_3);
+
+    /* Peripheral interrupt DeInit*/
+    HAL_NVIC_DisableIRQ(USART2_IRQn);
+
+  }
+  /* USER CODE BEGIN USART2_MspDeInit 1 */
+
+  /* USER CODE END USART2_MspDeInit 1 */
+
+
+```
+
+
+##環状バッファのコード
+
+画面を見やすくするため、今回は、バッファサイズは、３２バイトとします。
+
+main.c
+
+```c
+
+/* Includes ------------------------------------------------------------------*/
+#include "stm32f4xx_hal.h"
+
+/* USER CODE BEGIN Includes */
+#include <stdio.h>
+#include <string.h>
+
+#define SIZE 32
+
+```
+
+```c
+struct queue_data{
+    char queue[SIZE];
+    int writePoint;
+    int readPoint;
+};
+typedef struct queue_data queue_t;
+
+	queue_t q;
+  char data = 0;
+
+/* USER CODE END PFP */
+
+/* USER CODE BEGIN 0 */
+
+char message[15] ;
+
+#define queue_next(n) (((n) + 1) % SIZE)
+
+static void qe_init(queue_t *q)
+{
+    q->writePoint = 0;
+    q->readPoint = 0;
+}
+
+int
+qe_empty(queue_t q)
+{
+    return(q.writePoint == q.readPoint);
+}
+
+int qe_push(queue_t *q, char data)
+{
+    if(queue_next(q->readPoint) == q->writePoint) return(-1);
+    q->queue[q->readPoint] = data;
+    q->readPoint = queue_next(q->readPoint);
+    return(0);
+}
+
+_Bool qe_pop(queue_t *q, char *data){
+    if(q->writePoint == q->readPoint) return(1);
+    *data = q->queue[q->writePoint];
+    q->writePoint = queue_next(q->writePoint);
+    return(0);
+}
+
+static int usedRange(queue_t *q, int id)
+{
+    if((id < q->readPoint) && (id >= q->writePoint)) return(1);
+    if((id > q->readPoint) && (id >= q->writePoint) && (q->writePoint > q->readPoint)) return(1);
+    if((id < q->readPoint) && (id < q->writePoint)  && (q->writePoint > q->readPoint)) return(1);
+
+    return(0);
+}
+
+static void qe_print(queue_t *q)
+{
+    int count;
+						sprintf(message,"[");
+            HAL_UART_Transmit(&huart2,(uint8_t*)message,strlen(message),0x1111);
+    for(count = 0; count < SIZE; count++){
+        if(usedRange(q, count)){
+						 sprintf(message,"%2c,",q->queue[count]);
+            HAL_UART_Transmit(&huart2,(uint8_t*)message,strlen(message),0x1111);
+        }else{
+						sprintf(message,"%2c",'.');
+            HAL_UART_Transmit(&huart2,(uint8_t*)message,strlen(message),0x1111);
+        }
+    }
+		sprintf(message,"]\n");
+            HAL_UART_Transmit(&huart2,(uint8_t*)message,strlen(message),0x1111);
+}
+
+
+
+```
+
+受信が発生した場合に呼ばれるコールバック関数を記述します。
+
+```c
+uint8_t RX_DATA;
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	qe_push(&q, RX_DATA);
+	HAL_UART_Receive_IT(huart,&RX_DATA,1);
+	sprintf(message,"***Input!***");
+  HAL_UART_Transmit(&huart2,(uint8_t*)message,strlen(message),0x1111);
+}
+
+```
+
+
+main関数は、以下のようにします。割り込みで書き込み(push)するので、main関数には、環状バッファからデータをPopするだけとなります。
+HAL_UART_Receive_IT(&huart2,&RX_DATA,1)で割り込みを呼び出します。
+
+```c
+
+int main(void)
+{
+  /* USER CODE BEGIN 1 */
+	qe_init(&q);
+  /* USER CODE END 1 */
+
+  /* MCU Configuration----------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_USART2_UART_Init();
+
+  /* USER CODE BEGIN 2 */
+
+	 HAL_UART_Receive_IT(&huart2,&RX_DATA,1);
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+  /* USER CODE END WHILE */
+				 if(qe_pop(&q, (char *)&data) != 0){
+					sprintf(message,"Null\n");
+					HAL_UART_Transmit(&huart2,(uint8_t*)message,strlen(message),0x1111);
+					 qe_print(&q);
+        }else{
+           sprintf(message,"ReadData--> %c  ",data);
+            HAL_UART_Transmit(&huart2,(uint8_t*)message,strlen(message),0x1111);
+            qe_print(&q);
+        }
+				HAL_Delay(1500);
+  /* USER CODE BEGIN 3 */
+
+  }
+  /* USER CODE END 3 */
+
+}
+
+```
+
+
 
 
 
