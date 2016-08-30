@@ -13,6 +13,11 @@ Serialコネクタへ接続し、MicroUSBコネクタを他のデバイスに接
 ## Sample Code
 ###ボードから送信のみ
 ArduonoピンD0,D1をRX,TXとして使うため、SB62,SB63をはんだします。（注意：NecleoボードのSTLINKは、シリアル通信ができるので、Brickなしでもターミナルソフトで確認できます。従来は不要です。）
+
+SB62,SB63は、初期状態はオープンです。
+![USART2](../img/USB304/schmaShort.png)
+
+SB62,SB63をはんだを盛ってショートします。
 ![Cube](../img/USB304/solderSB62.jpg)
 
 STM32CubeMXを起動してUART2を設定します。DisableからAnsynchrous（非同期）に変更します。
@@ -81,7 +86,9 @@ Arduinoシールドのリセットボタンを押し、USB304BrickをSerialに�
 ##ボードに送受信をする。
 ボードにコマンドやデータを送ります。
 シリアル通信は１対１の通信なのでUART２とULINK側のボードと切り離すため、抵抗SB13,SB14の0Ω抵抗をはんだゴテで除去します。
-切り離すとパソコンのターミナルからシリアル通信はできなくなるので、#304 USB Brickは必須となります。
+切り離すとパソコンのターミナルからシリアル通信はできなくなるので、#304 USB
+
+![CubeConfig](../img/USB304/nucleoRegistanceRemove.jpg)
 
 上記のコードに以下のようにコードを変えます。
 
@@ -112,13 +119,15 @@ int c;
 そこで必要に応じたバッファメモリを確保し、受信があった場合バッファにメモリに書き込み（割り込み）、バッファがいっぱいになつたら古いバッファメモリに上書きするという処理をおこないます。（環状バッファ）同時に古い方のバッファから読み出し処理をします。
 ##割り込みによる受信
 STM32CubeMXを立ち上げて新しくプロジェクトを作ります。
-UARTをAynchroutに設定し、ConfigurationボタンをクリックしてUART2 Configuration画面が出ます。
+PinOut設定が画面でUSART2をAsynchronousに設定し、ConfigurationボタンをクリックしてUART2 Configuration画面が出ます。
 割り込みの設定をします。
 NVIC Settingを選び、USART2　global interrupt を　Enabledにします。
 
 するとmain.c以外にもstm32f4xx.it.cとｓｔｍ３２ｆ４ｘｘ_hal_map.cともにコードが自動的に追記されます。
 
-![NVIC](../img/USB304/USART2_Configration.png)
+![USART2](../img/USB304/ConfigurationUSART2.png)
+
+![USART2_Configration](../img/USB304/USART2_Configration.png)
 
 ｓｔｍ32f4xx.it.c(一部)
 
@@ -175,7 +184,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
 
 ##環状バッファのコード
 
-画面を見やすくするため、今回は、バッファサイズは、３２バイトとします。
+下記のコードを追記します。画面を見やすくするため、今回は、バッファサイズは、３２バイトとします。
 
 main.c
 
