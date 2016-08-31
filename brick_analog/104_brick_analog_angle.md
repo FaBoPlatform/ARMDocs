@@ -21,22 +21,21 @@ LED Brickの明るさを調節する際などに使用します。
 
 ## Sample Code
 
-A1コネクタにAngleを接続して、A1コネクタに接続したLED Brickをつなぎ、LEDの点灯間隔の時間をボリュームをかえることによって変化させます。
+A1コネクタにAngleを接続して、アナログ値を読み。A1コネクタに接続したLED Brickをつなぎ、LEDの点灯間隔の時間をボリュームをかえることによって変化させます。
 
-STM32CubeMXを起動し、ADC,USART2,GPIOを設定します。また、パソコンのターミナルから変化量が見れます。
+STM32CubeMXを起動し、ADC１(PA1),USART2をAnsynchrous,GPIO（PA0）は、OUTPUTを設定します。また、パソコンのターミナルから変化量が見れます。
 ![](../img/Angle104/PinOutConf.png)
 
 コンフィグレーションボタンを押して、次の画面が出てきたら、ADCを選びます。
 ![](../img/Angle104/ADCSELECT.png)
-![](../img/Angle104/ADCConf.png)
 
 NVICボタンを押します。
 ![](../img/Angle104/ADC_NVIC.png)
 
 GPIOボタンを押します。
-![](../img/Angle104/PinOutCof.png)
+![](../img/Angle104/ADCConf.png)
 
-CodeGrenarateします。
+CodeGenerateします。
 
 Keilを立ち上げ、main.cファイルに以下のコードを追記します。
 
@@ -52,6 +51,7 @@ Keilを立ち上げ、main.cファイルに以下のコードを追記します�
 /* USER CODE END Includes */
 ```
 
+ADCPinを取った値を用意。
 ```c
 /* Private variables ---------------------------------------------------------*/
 
@@ -60,6 +60,7 @@ int value=0;
 /* USER CODE END PV */
 ```
 
+HAL_ADC_GetValueでアナログ値（ADC 12bit 値の範囲0~4095）を取得。
 ```c
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -73,6 +74,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 
 ```
 
+メイン関数は以下のようになります。100ms点灯し、0~4095ms消灯します。
 ```c
 int main(void)
 {
