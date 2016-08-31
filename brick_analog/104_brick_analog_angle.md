@@ -23,16 +23,16 @@ LED Brickの明るさを調節する際などに使用します。
 
 A1コネクタにAngleを接続して、アナログ値を読み。A1コネクタに接続したLED Brickをつなぎ、LEDの点灯間隔の時間をボリュームをかえることによって変化させます。
 
-STM32CubeMXを起動し、ADC１(PA1),USART2をAnsynchrous,GPIO（PA0）は、OUTPUTを設定します。また、パソコンのターミナルから変化量が見れます。
+STM32CubeMXを起動し、ADC１(PA1),USART2をAnsynchrous,GPIO（PA0）は、OUTPUTを設定します。また、パソコンのターミナルソフトから変化量が見れます。
 ![](../img/Angle104/PinOutConf.png)
 
-コンフィグレーションボタンを押して、次の画面が出てきたら、ADCを選びます。
+Configurationボタンを押して、次の画面が出てきたら、ADCを選びます。
 ![](../img/Angle104/ADCSELECT.png)
 
-NVICボタンを押します。
+NVIC Settingボタンを押し,Enabledにチェックします。
 ![](../img/Angle104/ADC_NVIC.png)
 
-GPIOボタンを押します。
+GPIO Settingボタンを押し、User LabelはADCとします。
 ![](../img/Angle104/ADCConf.png)
 
 CodeGenerateします。
@@ -40,6 +40,7 @@ CodeGenerateします。
 Keilを立ち上げ、main.cファイルに以下のコードを追記します。
 
 コードの一部（抜粋）
+stdio.h,string.hを追記。
 
 ```c
 /* Includes ------------------------------------------------------------------*/
@@ -51,7 +52,7 @@ Keilを立ち上げ、main.cファイルに以下のコードを追記します�
 /* USER CODE END Includes */
 ```
 
-ADCPinを取った値を用意。
+ADCPinの値を入れる変数を用意。
 ```c
 /* Private variables ---------------------------------------------------------*/
 
