@@ -1,6 +1,6 @@
 # #104 Angle Brick
 
-<center>![](/img/100_analog/product/104.jpg)
+<center>![](../img/Angle104/104.jpg)
 <!--COLORME-->
 
 ## Overview
@@ -21,52 +21,115 @@ LED Brickの明るさを調節する際などに使用します。
 
 ## Sample Code
 
-A0コネクタにAngleを接続して、D3コネクタに接続したLED Brickの明るさ調節に使用しています。
-LED Birckの色の明るさを変えるには、PWMの端子につなぐ必要があり、今回はD3に接続しています。
+A1コネクタにAngleを接続して、A1コネクタに接続したLED Brickをつなぎ、LEDの点灯間隔の時間をボリュームをかえることによって変化させます。
 
-なお、FaBo Outin ShieldのPWM対応端子は　
+STM32CubeMXを起動し、ADC,USART2,GPIOを設定します。また、パソコンのターミナルから変化量が見れます。
+![](../img/Angle104/PinOutConf.png)
 
-* D3
-* D5
-* D6
-* D9
-* D10
-* D11
+コンフィグレーションボタンを押して、次の画面が出てきたら、ADCを選びます。
+![](../img/Angle104/ADCSELECT.png)
+![](../img/Angle104/ADCConf.png)
 
-になっています。(Arduinoと同じ)
+NVICボタンを押します。
+![](../img/Angle104/ADC_NVIC.png)
+
+GPIOボタンを押します。
+![](../img/Angle104/PinOutCof.png)
+
+CodeGrenarateします。
+
+Keilを立ち上げ、main.cファイルに以下のコードを追記します。
+
+コードの一部（抜粋）
 
 ```c
-//
-// FaBo Brick Sample
-//
-// #104 Angle Brick
-//
+/* Includes ------------------------------------------------------------------*/
+#include "stm32f4xx_hal.h"
 
-#define anglePin A0 // Angleピン
-#define ledPin 3    // LEDピン
-
-int angleValue = 0;
-int outputValue = 0;
-
-void setup() {
-  // Angleピンを入力用に設定
-  pinMode(anglePin, INPUT);
-  // LEDピンを出力用に設定
-  pinMode(ledPin, OUTPUT);
-}
-
-void loop() {
-  // Angleから値を取得(0〜1023)
-  angleValue = analogRead(anglePin);
-  // analogWrite用に取得した値を変換
-  outputValue = map(angleValue, 0, 1023, 0, 255);
-  // PWMによりLED点灯
-  analogWrite(ledPin, outputValue);
-}
+/* USER CODE BEGIN Includes */
+#include <stdio.h>
+#include <string.h>
+/* USER CODE END Includes */
 ```
+
+```c
+/* Private variables ---------------------------------------------------------*/
+
+int value=0;
+
+/* USER CODE END PV */
+```
+
+```c
+/* USER CODE BEGIN PFP */
+/* Private function prototypes -----------------------------------------------*/
+
+char adcFlag=0;
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+	value=HAL_ADC_GetValue(hadc);
+	adcFlag =1;
+}
+
+```
+
+```c
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+		char buffer[16];
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration----------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_ADC1_Init();
+  MX_USART2_UART_Init();
+
+  /* USER CODE BEGIN 2 */
+
+	adcFlag=0;
+  HAL_ADC_Start_IT(&hadc1);
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+		while(adcFlag != 0);
+		sprintf(buffer,"%dms\n\r",value);
+		HAL_UART_Transmit(&huart2,(uint8_t*)buffer,strlen(buffer),0x1111);
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_SET);
+		HAL_Delay(100);
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_RESET);
+		HAL_Delay(value);
+		adcFlag=0;
+		HAL_ADC_Start_IT(&hadc1);	  
+  /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
+
+  }
+  /* USER CODE END 3 */
+
+}
+
+
+```
+
 
 ## 構成Parts
 - ボリューム抵抗器A 10k
 
 ## GitHub
-- https://github.com/FaBoPlatform/FaBo/tree/master/104_angle
