@@ -32,16 +32,19 @@ Brickを接続するコネクタをA0に接続するため、ADC1をIN0をチェ
 
 ![](../img/TMP108/Pinout.png)
 
+ADC１を選びます。
 ![](../img/TMP108/ADC1SELECT.png)
 
+ParameterSettingsで解像度が12bitであるかを確認します。
 ![](../img/TMP108/ParameterSettings.png)
 
+GPIO Settingsを選び、UserLabelを追加します。
 ![](../img/TMP108/GPIOSetting.png)
 
 GenerateCordeを実行し、Keilを起動させます。
 
 main.cに自動で追加されるコード（抜粋）
-STM32CubeMXで設定によりコードが自動追加。
+STM32CubeMXで設定が反映され自動追加されています。
 
 ```c
 
