@@ -1,6 +1,6 @@
 # #102 Buzzer Brick
 
-<center>![](/img/100_analog/product/102.jpg)
+<center>![](../img/BUZZER102/102.jpg)
 <!--COLORME-->
 
 ## Overview
@@ -23,12 +23,12 @@ PWM出力するためにはTIM(タイマー)を使用します。PWMの周波数
 
 STM32CubeMXを起動します。Pinout設定で、USART2,ADC1,TIM3を設定します。
 クロックの設定画面です。ここでは今回は変更はしません。
-ADC設定画面です。チェックインします。
+ADC設定画面です。NVIC Setting（割り込みコントローラ）にチェックインします。
 TIM3の設定画面で分周する値を決めます。highとLowが等しいディーティー比５０％の128と数値を入力します。
 
 Generatecordeを選択します。すると自動的に初期のコードが生成されます。
 
-maic.cのソースコード抜粋
+maic.cのソースコード抜粋（ヘッダー部分）
 ```c
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
@@ -52,6 +52,110 @@ UART_HandleTypeDef huart2;
 /* Private variables ---------------------------------------------------------*/
 
 int a_Value,adc_fin=0;
+```
+
+AngleBrickからアナログ値を読み取るコールバック関数です。
+
+```c
+
+/* USER CODE BEGIN PFP */
+/* Private function prototypes -----------------------------------------------*/
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+	a_Value=HAL_ADC_GetValue(hadc);
+	adc_fin=1;
+}
+
+```
+
+pwmを出力する関数です。
+
+```c
+
+void pwmConf(int val)
+{
+	static int period=-1;
+	static int with=-1;
+	TIM_OC_InitTypeDef sConfigOC;
+
+		period=val+10;
+		with=period/2;
+
+ 	HAL_TIM_PWM_Stop(&htim3,TIM_CHANNEL_1);
+	HAL_TIM_PWM_DeInit(&htim3);
+	htim3.Init.Period = period;
+	HAL_TIM_PWM_Init(&htim3);
+
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	sConfigOC.Pulse = with;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
+
+}
+
+
+```
+
+main関数を以下のように追記してください。
+
+```c
+
+/* USER CODE BEGIN 0 */
+
+char message[15];
+
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration----------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_ADC1_Init();
+  MX_TIM3_Init();
+  MX_USART2_UART_Init();
+
+  /* USER CODE BEGIN 2 */
+	HAL_ADC_Start_IT(&hadc1);
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+		sprintf(message,"%3d\n\r",a_Value>>4);
+    HAL_UART_Transmit(&huart2,(uint8_t*)message,strlen(message),0x1111);
+
+			pwmConf(a_Value>>4);
+
+		HAL_Delay(1);
+		HAL_ADC_Start_IT(&hadc1);	  
+  }
+}
+
+
+```
+
+###ビープ音でドレミを演奏。
+
+```c
+```
+
+```c
 ```
 
 ```c
