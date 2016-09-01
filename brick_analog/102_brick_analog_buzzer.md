@@ -26,7 +26,8 @@ STM32CubeMXを起動します。Pinout設定で、USART2,ADC1,TIM3を設定し�
 ![](../img/BUZZER102/Pinout_Buzzer.png)
 
 
-TIM3の設定画面で分周する値を決めます。highとLowが等しいディーティー比５０％の128と数値を入力します。
+TIM3の設定画面で分周する値を決めます。highとLowが等しいディーティー比５０％の128と数値を入力します。プリスケーラは21504です。数値を変更すると、出せる周波数範囲が変わります。
+
 ![](../img/BUZZER102/TIM3_Buzzer_Clock.png)
 
 それぞれ選択し以下、設定してきます。
@@ -164,32 +165,103 @@ int main(void)
 ```
 
 ###ビープ音でドレミを演奏。
+BuzzerBrickをD12に差し込み、STM32CubeMXから新たにプロジェクトを立ち上げます。
+ピンは、以下のようになります。PA0からPWM出力します。
+![](../img/BUZZER102/Pinout_Select_Doremi.png)
+
+クロックを設定します。Timerの周波数を84MHzまで大きくします。
+![](../img/BUZZER102/ClockConfing.png)
+
+設定画面に移動してTIM3を選びます。
+![](../img/BUZZER102/Confing_SELECT.png)
+
+プリスケーラーを５に設定します。
+![](../img/BUZZER102/TIM3_prescara.png)
+
+Generatecordeします。
+
+
+main.cのファイルです。（抜粋）
+
+以下のコードを追記します。valueは幅となります。
+ディーティー比は５０％であり、その半分が波長となります。
 
 ```c
+
+void soundBeep(uint16_t value)
+{
+	uint16_t widht;
+	TIM_OC_InitTypeDef sConfigOC;
+
+	widht=value/2;
+
+ 	HAL_TIM_PWM_Stop(&htim3,TIM_CHANNEL_1);
+	HAL_TIM_PWM_DeInit(&htim3);
+	htim3.Init.Period = value;
+	HAL_TIM_PWM_Init(&htim3);
+
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	sConfigOC.Pulse = widht;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1);
+
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
+
+}
+
 ```
+
+main関数は以下のようにします。前に、タイマークロックは８４MHZ、プリスケーラは５に設定したことによりそれぞれの音階の周期を求めます。
 
 ```c
+
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+uint16_t codeF[8]={0xFAD5,0xDF78,0xC716,0xBBEA,0xA769,0x9525,0x84E0,0x7D6A};
+  /* USER CODE END 1 */
+
+  /* MCU Configuration----------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+
+	MX_GPIO_Init();
+  MX_TIM3_Init();
+  MX_USART2_UART_Init();
+
+  /* USER CODE BEGIN 2 */
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+  /* USER CODE END WHILE */
+		for (int i=0;i<8;i++){
+			soundBeep(codeF[i]);
+			HAL_Delay(1500);
+		}
+
+  /* USER CODE BEGIN 3 */
+
+  }
+  /* USER CODE END 3 */
+
+}
+
+
 ```
-
-```c
-```
-
-
-<br>
-数値が大きくなるほど音が高くなります。
-
-| | ド | ド♯ | レ | レ♯ | ミ | ファ | ファ♯ | ソ | ソ♯ | ラ | ラ♯ | シ |
-|  -- | -- |-- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
-|  1 | 131 | 139 | 147 | 156 | 165 | 175 | 185 | 196 | 208 | 220 | 233 | 247 |
-| 2 | 262 | 277 | 294 | 311 | 330 | 349 | 370 | 392 | 415 | 440 | 466 | 494 |
- | 3 | 523 | 554 | 587 | 622 | 659 | 698 | 740 | 784 | 831 | 880 | 932 | 988 |
-
-その他の音階については下記をご参照下さい。
-
-https://www.arduino.cc/en/Tutorial/ToneMelody?from=Tutorial.Tone
 
 ## 構成Parts
 - 圧電ブザー
 
 ## GitHub
-- https://github.com/FaBoPlatform/FaBo/tree/master/102_buzzer
