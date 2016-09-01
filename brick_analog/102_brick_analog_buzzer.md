@@ -7,7 +7,7 @@
 圧電ブザーを使ったBrickです。I/Oピンより、鳴らす音や音の長さを制御することができます。
 
 ## Connecting
-アナログコネクタ(A0〜A5)、またはデジタルコネクタ(2〜13)のいずれかに接続します。
+アナログコネクタ(A0〜A5)、またはデジタルコネクタ(2〜13)のいずれかに接続します。今回はD13にBuzzer Brickを、A0には、Angle Brickをつないでください。
 
 ![](/img/100_analog/connect/102_buzzer_connect.jpg)
 
@@ -15,39 +15,49 @@
 ![](/img/100_analog/schematic/102_buzzer.png)
 
 ## Sample Code
-D2コネクタにBuzzer Brickを接続し、ビープ音を鳴らしています。
+###PWMによる出力
+D12コネクタにBuzzer Brickを接続し、ビープ音を鳴らしています。#104 Angle Brickを使うことにより周波数をかえることができます。
+音の波形は矩形波でPWM出力します。マイコンが高速にスイッチングすることにより、特別なコンバータを使わずに周波数や波長が変えやすくモーター制御などによく使われます。highとlowの割合をディーティー比といいます。
 
+PWM出力するためにはTIM(タイマー)を使用します。PWMの周波数は、タイマーつまり、マイコンのクロック周波数に依存します。この周波数をPPL回路やプリスケーラなどで加工してタイマーの周波数に使用します。
+
+STM32CubeMXを起動します。Pinout設定で、USART2,ADC1,TIM3を設定します。
+クロックの設定画面です。ここでは今回は変更はしません。
+ADC設定画面です。チェックインします。
+TIM3の設定画面で分周する値を決めます。highとLowが等しいディーティー比５０％の128と数値を入力します。
+
+Generatecordeを選択します。すると自動的に初期のコードが生成されます。
+
+maic.cのソースコード抜粋
 ```c
-//
-// FaBo Brick Sample
-//
-// #102 Buzzer Brick
-//
+/* Includes ------------------------------------------------------------------*/
+#include "stm32f4xx_hal.h"
 
-#define buzzerPin 2 // ブザーピンの設定
+/* USER CODE BEGIN Includes */
 
-int duration = 500; // 音を鳴らす時間
 
-void setup() {
-  // ブザーピンを出力用に設定
-  pinMode(buzzerPin,OUTPUT);
-}
+#include <stdio.h>
+#include <string.h>
 
-void loop() {
-  tone(buzzerPin,262,duration); // ド
-  delay(duration);
+/* USER CODE END Includes */
 
-  tone(buzzerPin,294,duration); // レ
-  delay(duration);
+/* Private variables ---------------------------------------------------------*/
+ADC_HandleTypeDef hadc1;
 
-  tone(buzzerPin,330,duration); // ミ
-  delay(duration);
+TIM_HandleTypeDef htim3;
 
-  delay(1000);
-}
+UART_HandleTypeDef huart2;
+
+/* USER CODE BEGIN PV */
+/* Private variables ---------------------------------------------------------*/
+
+int a_Value,adc_fin=0;
 ```
 
-tone関数にて出力できる音階と周波数は下記のようになります。
+```c
+```
+
+
 <br>
 数値が大きくなるほど音が高くなります。
 
