@@ -25,16 +25,19 @@ PWM出力するためにはTIM(タイマー)を使用します。PWMの周波数
 STM32CubeMXを起動します。Pinout設定で、USART2,ADC1,TIM3を設定します。
 ![](../img/BUZZER102/Pinout_Buzzer.png)
 
+
+TIM3の設定画面で分周する値を決めます。highとLowが等しいディーティー比５０％の128と数値を入力します。
+![](../img/BUZZER102/TIM3_Buzzer_Clock.png)
+
 それぞれ選択し以下、設定してきます。
 ![](../img/BUZZER102/TIM3_SELECT.png)
+
 ADC設定画面です。NVIC Setting（割り込みコントローラ）にチェックインします。
-
 ![](../img/BUZZER102/NVIC_Buzzer.png)
-クロックの設定画面です。ここでは今回は変更はしません。
 
-![](../img/BUZZER102/TIM3_Buzzer_Clock.png)
-TIM3の設定画面で分周する値を決めます。highとLowが等しいディーティー比５０％の128と数値を入力します。
+クロックの設定画面です。ここでは今回は変更はしません。
 ![](../img/BUZZER102/Clock_Buzzer.png)
+
 
 Generatecordeを選択します。すると自動的に初期のコードが生成されます。
 
