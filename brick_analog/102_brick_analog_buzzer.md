@@ -169,11 +169,11 @@ BuzzerBrickをD12に差し込み、STM32CubeMXから新たにプロジェクト�
 ピンは、以下のようになります。PA0からPWM出力します。
 ![](../img/BUZZER102/Pinout_Select_Doremi.png)
 
-クロックを設定します。Timerの周波数を84MHzまで大きくします。
+クロックを設定します。の内部クロックHSI RCT 16Mhz内部クロックから、PLLを使い逓倍して、Prescalerで分割させ、Timerclocksの周波数を84MHzまで大きくします。
 ![](../img/BUZZER102/ClockConfing.png)
 
 設定画面に移動してTIM3を選びます。
-![](../img/BUZZER102/Confing_SELECT.png)
+![](../img/BUZZER102/Config_SELECT.png)
 
 プリスケーラーを５に設定します。
 ![](../img/BUZZER102/TIM3_prescara.png)
