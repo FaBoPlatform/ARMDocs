@@ -27,7 +27,7 @@ A0コネクタにLight Brickを接続して、明るさに応じたアナログ�
 Light Brickから入力するPA0はINPUTにします。USART2はAsynchronousにします。
 <center>![](../img/LIGHT109/USART_PinoutSettings.png)
 
-Configuration画面へ移動して、ADCを選択します。
+Configration画面へ移動して、ADCを選択します。
 <center>![](../img/LIGHT109/ADC_SELECT.png)
 
 NVIC_Settingsでチェックを入れます。
