@@ -20,7 +20,7 @@ I/Oピンから振動モーターのON/OFFを制御することができます�
 | [LA3R5-480AH1](http://akizukidenshi.com/catalog/g/gP-06744/) |
 
 ## Schematic
-<center>![](../img/VIBRATOR105/shematic_vibrator.png)
+<center>![](../img/VIBRATOR105/shematic_vibrator.PNG)
 ## Sample Code
 
 A0コネクタに接続したButton Brickの入力により、D2コネクタに接続したVibrator Brick のON/OFFを制御しています。
@@ -37,7 +37,7 @@ GenerateCodeをします。
 自動的に初期コードが生成されます。
 
 main.cのソースコード（一部抜粋）
-下記のコードは、GPIOを初期化する関数です。PA0はスイッチを入力するポートになります。電圧は供給し通常はHighの状態にし（Pullup）、誤作動を防止します。
+下記のコードは、GPIOを初期化する関数です。PA0はスイッチを入力するポートになります。電圧は供給し通常をHighの状態にし（Pullup）、誤作動を防止します。
 
 ```c
 static void MX_GPIO_Init(void)

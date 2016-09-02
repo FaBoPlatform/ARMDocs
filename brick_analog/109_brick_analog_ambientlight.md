@@ -1,6 +1,6 @@
 # #109 Light Brick
 
-<center>![](/img/100_analog/product/109.jpg)
+<center>![](../img/LIGHT109/105.jpg)
 <!--COLORME-->
 
 ## Overview
@@ -19,42 +19,118 @@ CDSセルを使用した光センサーBrickです。
 | [MI527](http://akizukidenshi.com/catalog/g/gI-00110/) |
 
 ## Schematic
-![](/img/100_analog/schematic/109_light.png)
+<center>![](../img/LIGHT109/Lingth_shematic.PNG)
 
 ## Sample Code
 A0コネクタにLight Brickを接続して、明るさに応じたアナログ値をシリアルモニタへ出力します。
 
+Light Brickから入力するPA0はINPUTにします。USART2はAsynchrousにします。
+<center>![](../img/LIGHT109/USART_PinoutSettings.png)
+
+Configuration画面へ移動して、ADCを選択します。
+<center>![](../img/LIGHT109/ADC_SELECT.png)
+
+NVIC_Settingsでチェックを入れます。
+<center>![](../img/LIGHT109/ADC_Settings.png)
+
+USARTは、通信速度は115200bpsになっているか確認します。
+<center>![](../img/LIGHT109/USART_Settings.png)
+
+strlenを使用するのでstdio.h,string.hを追記。
 ```c
-//
-// FaBo Brick Sample
-//
-// #109 Light Brick
-//
+/* Includes ------------------------------------------------------------------*/
+#include "stm32f4xx_hal.h"
 
-#define lightPin A0
+/* USER CODE BEGIN Includes */
 
-int lightValue = 0;
-
-void setup() {
-  pinMode(lightPin,INPUT);
-  Serial.begin(9600);
-}
-
-void loop() {
-  lightValue = analogRead(lightPin);
-  Serial.println(lightValue);
-  delay(100);
-}
+#include <stdio.h>
+#include <string.h>
 ```
 
-#### シリアルプロッタ
+アナログ値を取得する変数を用意。
+```c
 
-AndroidIDEではシリアルプロッタでも値を確認することが可能です。
 
-ArduinoIDEのメニューより[ツール]->[シリアルプロッタ]を選択することで起動できます。
+/* USER CODE BEGIN PV */
+/* Private variables ---------------------------------------------------------*/
 
-![](/img/100_analog/docs/109_light_docs_001.png)
+int value=0;
 
+/* USER CODE END PV */
+
+```
+
+アナログ値は、コールバック関数から取得します。
+```c
+
+char adcFlag=0;
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+	value=HAL_ADC_GetValue(hadc);
+	adcFlag =1;
+}
+
+```
+
+main関数
+値の結果は一対一の通信であるシリアル通信でパソコンに送ります。
+```c
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+	char buffer[16];
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration----------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_ADC1_Init();
+  MX_USART2_UART_Init();
+
+  /* USER CODE BEGIN 2 */
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+  /* USER CODE END WHILE */
+
+		while(adcFlag != 0);
+		sprintf(buffer,"%d\n\r",value);
+		HAL_UART_Transmit(&huart2,(uint8_t*)buffer,strlen(buffer),0x1111);
+		HAL_Delay(100);
+		adcFlag=0;
+		HAL_ADC_Start_IT(&hadc1);	  
+  /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
+
+  }
+  /* USER CODE END 3 */
+
+}
+
+```
+
+ビルドして書き込み終了後、リセットボタンを押し、動作を確認します。値は０～４０９５で変化し、明るくなるほど、数値が小さくなります。
+
+#### ターミナルソフトから確認する。
+Necleoから送られてくるシリアル信号をパソコン上に表示させます。
+TeraTermを起動します。
+
+設定します。
 
 ## 構成Parts
 - CDSセル(5mm)
