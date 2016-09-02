@@ -20,8 +20,7 @@ I/Oピンから振動モーターのON/OFFを制御することができます�
 | [LA3R5-480AH1](http://akizukidenshi.com/catalog/g/gP-06744/) |
 
 ## Schematic
-![](/img/100_analog/schematic/105_vibrator.png)
-
+<center>![](../img/VIBRATOR105/shematic_vibrator.png)
 ## Sample Code
 
 A0コネクタに接続したButton Brickの入力により、D2コネクタに接続したVibrator Brick のON/OFFを制御しています。
