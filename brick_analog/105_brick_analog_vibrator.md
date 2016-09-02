@@ -1,6 +1,6 @@
 # #105 Vibrator Brick
 
-<center>![](/img/100_analog/product/105.jpg)
+<center>![](../img/VIBRATOR105/105.jpg)
 <!--COLORME-->
 
 ## Overview
@@ -25,44 +25,96 @@ I/Oピンから振動モーターのON/OFFを制御することができます�
 ## Sample Code
 
 A0コネクタに接続したButton Brickの入力により、D2コネクタに接続したVibrator Brick のON/OFFを制御しています。
+ボタンを押すとバイブレーターが始動します。
+
+STM32CubeMXを起動して、Pinout設定します。GPIO PA0はINPUT GPIO PA10はOUTPUTに設定します。
+<center>![](../img/VIBRATOR105/PinoutSettings.png)
+
+PA0 GPIO INPUTをPullUPします。
+<center>![](../img/VIBRATOR105/GPIOSettings.png)
+
+GenerateCodeをします。
+
+自動的に初期コードが生成されます。
+
+main.cのソースコード（一部抜粋）
+下記のコードは、GPIOを初期化する関数です。PA0はスイッチを入力するポートになります。電圧は供給し通常はHighの状態にし（Pullup）、誤作動を防止します。
 
 ```c
-//
-// FaBo Brick Sample
-//
-// #105 Vibrator Brick
-//
+static void MX_GPIO_Init(void)
+{
 
-#define vibratorPin 2 // Vibratorピン
-#define buttonPin A0  // ボタンピン
+  GPIO_InitTypeDef GPIO_InitStruct;
 
-int buttonState = 0;
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOA_CLK_ENABLE();
 
-void setup() {
-  // Vibratorピンを出力用に設定
-  pinMode(vibratorPin, OUTPUT);
-  // ボタンピンを入力用に設定
-  pinMode(buttonPin, INPUT);
-}
+  /*Configure GPIO pin : PA0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-void loop(){
-  // ボタンの押下状況を取得
-  buttonState = digitalRead(buttonPin);
+  /*Configure GPIO pin : PA10 */
+  GPIO_InitStruct.Pin = GPIO_PIN_10;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  // ボタン押下判定
-  if (buttonState == HIGH) {
-    // ボタンが押された場合、Vibratorオン
-    digitalWrite(vibratorPin, HIGH);
-  }
-  else {
-    // Vibratorオフ
-    digitalWrite(vibratorPin, LOW);
-  }
-}
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
+
 ```
+
+main関数
+```c
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration----------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+
+  /* USER CODE BEGIN 2 */
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+		if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)==GPIO_PIN_RESET){
+			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_10,GPIO_PIN_RESET);
+		}else{
+			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_10,GPIO_PIN_SET);
+		}
+  /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
+
+  }
+  /* USER CODE END 3 */
+
+}
+
+```
+
+
+リセットボタンを押すと起動します。
 
 ## 構成Parts
 - 振動モーター LA3R5-480AH1
 
 ## GitHub
-- https://github.com/FaBoPlatform/FaBo/tree/master/105_vibrator
