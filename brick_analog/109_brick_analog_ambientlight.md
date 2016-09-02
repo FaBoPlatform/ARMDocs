@@ -127,13 +127,18 @@ int main(void)
 ビルドして書き込み終了後、リセットボタンを押し、動作を確認します。値は０～４０９５で変化し、明るくなるほど、数値が小さくなります。
 
 #### ターミナルソフトから確認する。
-Necleoから送られてくるシリアル信号をパソコン上に表示させます。
-TeraTermを起動します。
-
+Necleoから送られてくるシリアル信号をパソコン上に表示させます。いくつかターミナルソフトはあるのですが、今回はTeraTermを使用します。
+TeraTermを起動します。シリアルを選択しNecleoボードを選択します。COMポートの番号はパソコンの設定で変化します。OKボタンを押します。
+<center>![](../img/LIGHT109/PortSelect.png)
+設定からシリアルポートを選択します。
+<center>![](../img/LIGHT109/SerialPortSelect.png)
+下記のように設定します。Necleoの設定により通信速度9600bpsから115200bps　8bit　パリティなし　ストップビット1bit　フロー制御なしで通信します。
+<center>![](../img/LIGHT109/SerialConfing.png)
+値が次々と表示されます。
+<center>![](../img/LIGHT109/ValueGet.png)
 設定します。
 
 ## 構成Parts
 - CDSセル(5mm)
 
 ## GitHub
-- https://github.com/FaBoPlatform/FaBo/tree/master/109_light
