@@ -24,7 +24,7 @@ CDSセルを使用した光センサーBrickです。
 ## Sample Code
 A0コネクタにLight Brickを接続して、明るさに応じたアナログ値をシリアルモニタへ出力します。
 
-Light Brickから入力するPA0はINPUTにします。USART2はAsynchrousにします。
+Light Brickから入力するPA0はINPUTにします。USART2はAsynchronousにします。
 <center>![](../img/LIGHT109/USART_PinoutSettings.png)
 
 Configuration画面へ移動して、ADCを選択します。
