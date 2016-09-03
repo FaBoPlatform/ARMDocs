@@ -7,7 +7,7 @@
 FT232RLを使用した、USBシリアル通信ができるBrickです。
 
 ## Connecting
-Serialコネクタへ接続し、MicroUSBコネクタを他のデバイスに接続します。
+Serialコネクタへ接続し、MicroUSBコネクタを他のデバイスに接続します。Necleoのi/oは3.3Vで駆動しますのでUSB Brickの電圧スイッチを3.3Vにしてください。
 
 
 ## Sample Code
