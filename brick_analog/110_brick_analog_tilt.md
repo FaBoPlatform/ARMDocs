@@ -22,35 +22,48 @@ LED Brickを点灯/消灯させる際などに使用します。
 
 ## Sample Code
 
-A0コネクタに接続したTilt Brickの傾きによって、D2コネクタに接続したLED Brickを点灯/消灯させています。
-
+A1コネクタに接続したTilt Brickの傾きによって、A0コネクタに接続したLED Brickを点灯/消灯させています。
+STM32CubeMXを起動して、GPIO設定します。PA0をOUTPUT PA1をINPUTにします。Codegenerateして、main.cに以下のコードを追記するだけです。
 ```c
-//
-// FaBo Brick Sample
-//
-// #110 Tilt Brick
-//
+int main(void)
+{
 
-#define buttonPin A0
-#define ledPin 2
+  /* USER CODE BEGIN 1 */
 
-int buttonState = 0;
 
-void setup() {
-  pinMode(buttonPin, INPUT);
-  pinMode(ledPin, OUTPUT);
-}
+  /* USER CODE END 1 */
 
-void loop(){
+  /* MCU Configuration----------------------------------------------------------*/
 
-  buttonState = digitalRead(buttonPin);
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
 
-  if (buttonState == HIGH) {
-    digitalWrite(ledPin, HIGH);
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+
+  /* USER CODE BEGIN 2 */
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+  /* USER CODE END WHILE */
+		 if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_1)==GPIO_PIN_RESET){
+    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_RESET);
+  }else{
+    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_SET);
   }
-  else {
-    digitalWrite(ledPin, LOW);
+
+  /* USER CODE BEGIN 3 */
+
   }
+  /* USER CODE END 3 */
+
 }
 ```
 
@@ -58,4 +71,3 @@ void loop(){
 - 傾斜(振動)スイッチ
 
 ## GitHub
-- https://github.com/FaBoPlatform/FaBo/tree/master/110_tilt
