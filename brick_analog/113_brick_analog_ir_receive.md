@@ -1,6 +1,6 @@
 # #113 IR Receiver Brick
 
-<center>![](/..img/IR_RECEIVER113/113.png)
+<center>![](..img/IR_RECEIVER113/113.png)
 <!--COLORME-->
 
 ## Overview
@@ -28,11 +28,11 @@ A1コネクタに赤外線受信Brick、A0コネクタにLED Brickを接続し�
 リモコン等をIR_RECEIVE Brickにリモコンに送信します。赤外線の受光があったとき、電圧がHighとなります。LowからHigh(raise)があったとき、LED Brickを点灯させます。
 
 STM32CubeMXを起動して、UART2をAnsynchrous,PA0は、OUTPUT,PA1 EXT1とします。
-<center>![](/..img/IR_RECEIVER113/Pinout113.png)
+<center>![](..img/IR_RECEIVER113/Pinout113.png)
 ClockSettingsは、以下のようにします。
-<center>![](/..img/IR_RECEIVER113/ClockSettings.png)
+<center>![](..img/IR_RECEIVER113/ClockSettings.png)
 NVIC_Settingsは以下のように設定します。
-<center>![](/..img/IR_RECEIVER113/NVIC_Settings.png)
+<center>![](..img/IR_RECEIVER113/NVIC_Settings.png)
 
 下記のコードが自動で生成されます。ClockSettingsで決めた設定が繁栄され、HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);が追加され割り込み処理は優先順位が決められます。
 
