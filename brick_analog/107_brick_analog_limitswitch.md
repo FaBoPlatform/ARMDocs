@@ -33,41 +33,50 @@ OUTコネクタのいずれかに接続します。
 ![](/img/100_analog/schematic/107_limitswitch.png)
 
 ## Sample Code
-A0コネクタにLimitSwitch Brickを接続し、D2コネクタに接続したLED Brickの点灯/消灯を制御しています。
+A1コネクタにLimitSwitch Brickを接続し、A0コネクタに接続したLED Brickの点灯/消灯を制御しています。
 
 ```c
-//
-// FaBo Brick Sample
-//
-// #107 LimitSwitch Brick
-//
+STM32CubeMXを起動して、GPIO設定します。PA0をOUTPUT PA1をINPUTにします。Codegenerateして、main.cに以下のコードを追記するだけです。
+```c
+int main(void)
+{
 
-#define buttonPin A0 // リミットスイッチピン
-#define ledPin 2     // LEDピン
+  /* USER CODE BEGIN 1 */
 
-// リミットスイッチの状況取得用
-int buttonState = 0;
 
-void setup() {
-  // リミットスイッチピンを入力用に設定
-  pinMode(buttonPin, INPUT);
-  // LEDピンを出力用に設定
-  pinMode(ledPin, OUTPUT);
-}
+  /* USER CODE END 1 */
 
-void loop(){
-  // リミットスイッチの押下状況を取得
-  buttonState = digitalRead(buttonPin);
+  /* MCU Configuration----------------------------------------------------------*/
 
-  // リミットスイッチ判定
-  if (buttonState == LOW) {
-    // LED点灯
-    digitalWrite(ledPin, HIGH);
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+
+  /* USER CODE BEGIN 2 */
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+  /* USER CODE END WHILE */
+		 if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_1)==GPIO_PIN_RESET){
+    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_RESET);
+  }else{
+    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_0,GPIO_PIN_SET);
   }
-  else {
-    // LED消灯
-    digitalWrite(ledPin, LOW);
+
+  /* USER CODE BEGIN 3 */
+
   }
+  /* USER CODE END 3 */
+
 }
 ```
 
@@ -75,4 +84,3 @@ void loop(){
 - リミットスイッチ
 
 ## GitHub
-- https://github.com/FaBoPlatform/FaBo/tree/master/107_limitswitch
