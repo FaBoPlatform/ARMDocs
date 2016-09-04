@@ -23,7 +23,7 @@ I/Oピンから赤外線受信のON/OFFを取得することができます。
 ![](/img/100_analog/schematic/113_ir_receive.png)
 
 ## Sample Code
-
+###ピン変化割り込み処理によるLED点灯
 A1コネクタに赤外線受信Brick、A0コネクタにLED Brickを接続し、赤外線を受信したらLEDを発光させます。
 リモコン等をIR_RECEIVE Brickにリモコンに送信します。赤外線の受光があったとき、電圧がHighとなります。LowからHigh(raise)があったとき、LED Brickを点灯させます。
 
