@@ -76,6 +76,8 @@ int main(void)
 赤外線は可視光線ではないので、カメラのモニタで見ます。ButtonBrickのボタンを押すと、紫色に発光するのが確認できると思います。
 iPhoneのカメラでは見えないので他のもので確認願います。
 
+<center>![](../img/IR_LED112/112Lightning.jpg)
+
 ## 構成Parts
 - 5mm 赤外線LED OSI5LA5113A
 
