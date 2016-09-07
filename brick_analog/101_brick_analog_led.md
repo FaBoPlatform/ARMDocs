@@ -176,7 +176,7 @@ A0にLED Brickを接続し、１秒ごとにLチカ（点滅）させます。
 プリスケーラの値は、１少ない、8399となります。
 
 timerclockが８４MHZになるように設定します。
-<download>![](../img/LED101/ClockSettings.png)
+<download>![](../img/LED101/Clock_Settings.png)
 TIM1を選びます。
 <download>![](../img/LED101/confing.png)
 チェックさせます。
@@ -186,7 +186,7 @@ TIM1を選びます。
 
 CodeGenerateします。コードが自動的に生成されます。
 
-main.cファイルに次のコールバック関数を追記します。
+main.cファイルに次のコールバック関数を追記します。ピリオドが１００００回ごとに呼ばれます。
 
 ```c
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
@@ -194,7 +194,7 @@ HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_0);
 }
 ```
 
-main関数にはHAL_TIM_Base_Start_IT(&htim1);を追記します。
+main関数にはTIM１をスタートさせる関数、HAL_TIM_Base_Start_IT(&htim1);を追記します。
 
 ```c
 
