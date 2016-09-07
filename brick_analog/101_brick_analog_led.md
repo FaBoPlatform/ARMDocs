@@ -167,6 +167,80 @@ Buildボタンをクリック。（ショートカットF7キー）
 
 リセットボタンを押すと起動します。Brick LEDが点滅したかどうか動作をご確認ください。
 
+##タイマー割り込みによるLチカ
+A0にLED Brickを接続し、１秒ごとにLチカ（点滅）させます。
+タイマーがいくつかありまして、今回は、TIM1を使用します。
+割り込みで、８４MHｚを8400分割して、１０KHZにします。１クロックあたり、１００μ秒となります。
+ピリオドはタイマーの最大１６bitのカウンタ（最大65535まで）でいっぱいになるとゼロにもどります。
+今回のピリオドは、１秒にしたいので、1*10^6/100=10000とします。
+プリスケーラの値は、１少ない、8399となります。
+
+timerclockが８４MHZになるように設定します。
+<download>![](../img/LED101/ClockSettings.png)
+TIM1を選びます。
+<download>![](../img/LED101/confing.png)
+チェックさせます。
+<download>![](../img/LED101/nvic.png)
+下記のように設定します。
+<download>![](../img/LED101/parameter.png)
+
+CodeGenerateします。コードが自動的に生成されます。
+
+main.cファイルに次のコールバック関数を追記します。
+
+```c
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_0);
+}
+```
+
+main関数にはHAL_TIM_Base_Start_IT(&htim1);を追記します。
+
+```c
+
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration----------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_TIM1_Init();
+
+  /* USER CODE BEGIN 2 */
+
+	HAL_TIM_Base_Start_IT(&htim1);
+
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+
+
+  /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
+
+  }
+  /* USER CODE END 3 */
+
+}
+
+```
+
 ## 構成パーツParts
 - 5mm LED(各色)
 

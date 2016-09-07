@@ -1,6 +1,6 @@
 # #112 IR LED Brick
 
-<center>![](/img/100_analog/product/112.jpg)
+<center>![](../img/IR_LED112/112.jpg)
 <!--COLORME-->
 
 ## Overview
@@ -13,9 +13,6 @@ I/Oピンから赤外線LEDをON/OFFを制御することができます。
 
 ![](/img/100_analog/connect/112_ir_connect.jpg)
 
-### IchigoJam
-OUTコネクタのいずれかに接続します。
-
 
 ## Parts Specification
 | Document |
@@ -27,36 +24,57 @@ OUTコネクタのいずれかに接続します。
 
 ## Sample Code
 ### for Arduino
-A0コネクタに赤外線LED Brick、A1コネクタにボタンBrickを接続し、ボタンが押されたら赤外線LEDを発光させます。
+A1コネクタに赤外線LED Brick、A2コネクタにボタンBrickを接続し、ボタンが押されたら赤外線LEDを発光させます。
+STM32CubeMXを起動し、A1をGPIO_Output,A2をGPIO_Inputにします。
+CodeGenerateします。
+
+main関数
+
 ```c
-//
-// FaBo Brick Sample
-//
-// #112 IR LED Brick
-//
+int main(void)
+{
 
-#define ir_ledPin A0
-#define buttonPin A1
+  /* USER CODE BEGIN 1 */
 
-int buttonState = 0;
+  /* USER CODE END 1 */
 
-void setup() {
-  pinMode(ir_ledPin, OUTPUT);
-  pinMode(buttonPin, INPUT);
-}
+  /* MCU Configuration----------------------------------------------------------*/
 
-void loop() {
-  buttonState = digitalRead(buttonPin);
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
 
-  if (buttonState == HIGH) {
-    digitalWrite(ir_ledPin, HIGH);
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+
+  /* USER CODE BEGIN 2 */
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+		if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)==GPIO_PIN_SET){
+			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,GPIO_PIN_SET);
+		}else{
+			HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,GPIO_PIN_RESET);
+		}
+  /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
+
   }
-  else {
-    digitalWrite(ir_ledPin, LOW);
-  }
+  /* USER CODE END 3 */
 
 }
 ```
+
+ファームウェアをLoadして、リセットボタンを押して、起動させます。
+赤外線は可視光線ではないので、カメラのモニタで見ます。ButtonBrickのボタンを押すと、紫色に発光するのが確認できると思います。
+iPhoneのカメラでは見えないので他のもので確認願います。
 
 ## 構成Parts
 - 5mm 赤外線LED OSI5LA5113A
