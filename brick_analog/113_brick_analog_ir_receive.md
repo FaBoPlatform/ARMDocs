@@ -138,6 +138,124 @@ void EXTI1_IRQHandler(void)
 ```
 リセットボタンを押すと、起動します。
 
+##赤外線リモコンから出す赤外線の波形の幅を取得。
+赤外線のリモコンをご用意ください。リモコンから出す赤外線のhighとlowの時間の長さを調べます。
+A0にIR ReceiverBrickを接続して、STM32CubeMXを起動してください。
+
+ピン設定します。
+<center>![](../img/IR_RECEIVER113/PinoutConfigration_width.png)
+下記のように TimerClocksがともに84Mhzになるように、クロックを設定します。
+<center>![](../img/IR_RECEIVER113/ClockConfigration_width.png)
+TIM1をえらんで
+<center>![](../img/IR_RECEIVER113/Configration_width.png)
+プリスケーラ値は８３に設定します。ピリオドは65535にします。
+<center>![](../img/IR_RECEIVER113/TIM_Configration_width.png)
+CodeGenerateを実行ます。
+
+main.cファイルの一部
+stdio.hとstring.hをインクルード
+
+```c
+/* Includes ------------------------------------------------------------------*/
+#include "stm32f4xx_hal.h"
+
+/* USER CODE BEGIN Includes */
+#include <stdio.h>
+#include <string.h>
+```
+
+main関数
+波形の立ち上がりを待ってタイマーをスタートさせ、立下りでタイマーをストップさせます。
+
+```c
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+		char str[15];
+		int timevalue_low,timevalue_high;
+
+
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration----------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_TIM1_Init();
+  MX_USART2_UART_Init();
+
+  /* USER CODE BEGIN 2 */
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+		//受信待機メッセージ
+			sprintf(str,"Listening OK\n\r");
+			HAL_UART_Transmit(&huart2,(uint8_t *)&str,strlen(str),0010);
+
+		while(1){
+			//立ち上がりするのを待機
+			while (HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)==GPIO_PIN_SET);
+			while (HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)==GPIO_PIN_RESET);
+
+			//タイマーをスタートさせる。
+			htim1.Instance->CNT=0;
+			HAL_TIM_Base_Start(&htim1);
+
+			//立ち下げを待機
+			while (HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)==GPIO_PIN_SET);
+
+			//タイマーをストップさせ、時刻を記録。
+			timevalue_high = htim1.Instance->CNT;
+			HAL_TIM_Base_Stop(&htim1);
+
+			//タイマーのカウントを０にして、タイマー再スタート。
+			htim1.Instance->CNT=0;
+			HAL_TIM_Base_Start(&htim1);
+
+			//立ち上げするのを待機
+			while (HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)==GPIO_PIN_RESET);
+
+			//タイマーをストップさせる時刻を記録。
+			timevalue_low = htim1.Instance->CNT;
+			HAL_TIM_Base_Stop(&htim1);
+
+			//結果をターミナルに出力。
+			sprintf(str,"high:%d.%03d\n\r",(timevalue_high/1000),(timevalue_high%1000));
+			HAL_UART_Transmit(&huart2,(uint8_t *)&str,strlen(str),0010);
+
+			sprintf(str,"low:%d.%03d\n\r",(timevalue_low/1000),(timevalue_low%1000));
+			HAL_UART_Transmit(&huart2,(uint8_t *)&str,strlen(str),0010);
+  /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
+		}
+
+  }
+  /* USER CODE END 3 */
+
+}
+
+```
+
+
+リセットボタンを押すと起動します。赤外線リモコンからIR ReceiverBrickに向かって送信してみてください。
+Teratermを起動して、確認してください。
+
+
+
 ## 構成Parts
 - 赤外線フォトトランジスタ
 
