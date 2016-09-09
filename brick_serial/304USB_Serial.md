@@ -347,6 +347,115 @@ int main(void)
 
 ```
 
+##DMAによるシリアル通信
+DMAを使用すれば、CPUが他の処理をすることができ、効率的に処理できます。
+サンプルは、入力した文字をエコーバックしています。
+
+UART2のみ有効にします。
+![USART2](../img/USB304/PinOutConigration.png)
+
+クロックが最大になるように設定してください。
+![USART2](../img/USB304/DMA_ClockConfigration.png)
+
+USART2を選択します。
+![USART2](../img/USB304/Configration.png)
+
+Addボタンを押して、RX,TXを追加します。
+![USART2](../img/USB304/USART2_Configs.png)
+
+DMA設定されているか確認します。
+![USART2](../img/USB304/DMA_Configration.png)
+
+CodeGenerateします。
+
+サンプルコード一部抜粋
+```c
+/* Includes ------------------------------------------------------------------*/
+#include "stm32f4xx_hal.h"
+
+/* USER CODE BEGIN Includes */
+uint8_t RX_Buffer = '\000';
+uint8_t TX_Buffer = '\000';
+
+/* USER CODE END Includes */
+
+/* Private variables ---------------------------------------------------------*/
+UART_HandleTypeDef huart2;
+DMA_HandleTypeDef hdma_usart2_rx;
+DMA_HandleTypeDef hdma_usart2_tx;
+
+/* USER CODE BEGIN PV */
+/* Private variables ---------------------------------------------------------*/
+
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+void Error_Handler(void);
+static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
+static void MX_USART2_UART_Init(void);
+```
+
+```c
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+        __HAL_UART_FLUSH_DRREGISTER(&huart2);
+        TX_Buffer = RX_Buffer;
+        HAL_UART_Transmit_DMA(&huart2, (uint8_t *)&TX_Buffer, 1);
+				HAL_UART_Receive_DMA(&huart2, &RX_Buffer, 1);
+        return;
+}
+
+```
+
+main関数
+
+```c
+
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration----------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_DMA_Init();
+  MX_USART2_UART_Init();
+
+  /* USER CODE BEGIN 2 */
+
+  __HAL_UART_FLUSH_DRREGISTER(&huart2);
+  HAL_UART_Receive_DMA(&huart2, &RX_Buffer, 1);
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+  /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
+
+  }
+  /* USER CODE END 3 */
+
+}
+
+
+```
 
 
 
