@@ -348,7 +348,7 @@ int main(void)
 ```
 
 ##DMAによるシリアル通信
-DMAを使用すれば、CPUが他の処理をすることができ、効率的に処理できます。
+DMAを使用すれば、CPUは他の処理をすることができ、効率的に処理できます。
 サンプルは、入力した文字をエコーバックしています。
 
 UART2のみ有効にします。
@@ -360,10 +360,10 @@ UART2のみ有効にします。
 USART2を選択します。
 ![USART2](../img/USB304/Configration.png)
 
-Addボタンを押して、RX,TXを追加します。
+チェックします。
 ![USART2](../img/USB304/USART2_Configs.png)
 
-DMA設定されているか確認します。
+Addボタンを押して、RX,TXを追加します。
 ![USART2](../img/USB304/DMA_Configration.png)
 
 CodeGenerateします。
