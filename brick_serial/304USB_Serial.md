@@ -354,14 +354,18 @@ DMAを使用すれば、CPUは他の処理をすることができ、効率的�
 UART2のみ有効にします。
 ![USART2](../img/USB304/PinOutConigration.png)
 
+
 クロックが最大になるように設定してください。
 ![USART2](../img/USB304/DMA_ClockConfigration.png)
+
 
 USART2を選択します。
 ![USART2](../img/USB304/Configration.png)
 
+
 チェックします。
 ![USART2](../img/USB304/USART2_Configs.png)
+
 
 Addボタンを押して、RX,TXを追加します。
 ![USART2](../img/USB304/DMA_Configration.png)
@@ -396,6 +400,8 @@ static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_USART2_UART_Init(void);
 ```
+
+受信時に呼ばれるコールバック関数。
 
 ```c
 
