@@ -154,6 +154,7 @@ int main(void)
 ```
 
 Buildボタンをクリック。（ショートカットF7キー）
+Buildは変更されたターゲットファイルのみビルドします。rebuildは、すべてのターゲットファイルをビルドします。
 
 <Build>![](../img/loadbuild0.png)
 
