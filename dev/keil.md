@@ -25,7 +25,7 @@ http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation
 ４本から５本必要。
 MCUを検査するバウンダリングスキャンが可能でデイジーチェーンにより複数台同時接続が可能。
 | pin |  |
-| :-- | :-- |
+|:--:|:--:|
 | TCK | クロック信号 |
 | TMS |モードセレクト |
 | NRST | リセット |
@@ -35,7 +35,7 @@ MCUを検査するバウンダリングスキャンが可能でデイジーチ�
 ##SWD
 少なくても２本(SWCLK,SWDIO)必要。トレース機能を利用したい場合はSWOを追加する。
 | pin |  |
-| :-- | :-- |
+|:--:|:--:|
 | SWCLK | クロック信号 |
 | SWDIO | データ |
 | NRST | リセット |
