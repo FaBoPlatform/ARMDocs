@@ -24,10 +24,11 @@ http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation
 ##JTAG　
 ４本から５本必要。
 MCUを検査するバウンダリングスキャンが可能でデイジーチェーンにより複数台同時接続が可能。
+
 | pin |  |
-|:--:|:--:|
+|:--|:--|
 | TCK | クロック信号 |
-| TMS |モードセレクト |
+| TMS | モードセレクト |
 | NRST | リセット |
 | TDI | データ入力 |
 | TDO | データ出力 |
