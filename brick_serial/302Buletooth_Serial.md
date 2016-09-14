@@ -75,7 +75,7 @@ uint8_t RxBuffer[32];
 
 ```
 
-次にコールコールバック関数を記述します。
+次にコールバック関数を記述します。
 ```c
 //DMAの送信が完了したときに呼ばれる
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
