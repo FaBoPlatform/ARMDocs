@@ -1,6 +1,6 @@
 # #305 Buletooth Serial Brick
 
-![Cube](../img/BLUETOOTH302/Connect305.jpg)
+![Cube](../img/BLUETOOTH302/Connect302.jpg)
 <!--COLORME-->
 
 ## Overview
