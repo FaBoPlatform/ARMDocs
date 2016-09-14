@@ -1,6 +1,6 @@
 # #305 Buletooth Serial Brick
 
-![Cube](../img/WIFI305/302.jpg)
+![Cube](../img/BLUETOOTH302/302.jpg)
 <!--COLORME-->
 
 ## Overview
@@ -20,9 +20,9 @@ STM32CubeMXを起動しDMAが使用できるように設定します。
 USART2,USART6をAnsynchrousに設定し有効にします。
 ![Cube](../img/BLUETOOTH302/Pinoutsettings_302.png)
 下記のようにクロックを最大になるように、設定してください。
-![Cube](../img/BLUETOOTH302/ClockConfigration302.png)
+![Cube](../img/BLUETOOTH302/ClockConfigrarion302.png)
 USART2,USART6を選択.
-![Cube](../img/BLUETOOTH302/Configrarion302.png)
+![Cube](../img/BLUETOOTH302/Congfigrarion302.png)
 NVIC_SettingsでUSART2,USART6ともに有効にします。
 ![Cube](../img/BLUETOOTH302/NvicConfigration302.png)
 DMAを選択し、UART2,UART6ともにADDします。
@@ -181,9 +181,16 @@ int main(void)
 }
 
 ```
+Macターミナルを起動（例）
+>screen /deb/tty.RNBT-********-RNI-SPP 115200を入力し。
+ターミナルから任意の入力。３２回目になるとバッファーがいっぱいになるので、下のように表示されます。
 
-TeraTermなどでファームウェアバージョンが表示されたら正常です。
+USART2側
 ![Cube](../img/BLUETOOTH302/BluetoothPC.png)
+
+USART6側
+![Cube](../img/BLUETOOTH302/MacConsole.png)
+TeraTermなどでファームウェアバージョンが表示されたら正常です。
 
 ## 構成Parts
 -
