@@ -193,7 +193,7 @@ USART6側
 
 ![Cube](../img/BLUETOOTH302/MacConsole.png)
 
-TeraTermなどでファームウェアバージョンが表示されたら正常です。
+UART6には、コールバック関数が呼ばれると上記のように関数名が表示されます。
 
 ## 構成Parts
 -
