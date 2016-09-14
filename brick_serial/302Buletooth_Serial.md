@@ -18,15 +18,15 @@ UART6から入力された文字がDMAによってメモリに格納され、格
 
 STM32CubeMXを起動しDMAが使用できるように設定します。
 USART2,USART6をAnsynchrousに設定し有効にします。
-![Cube](../img/BLUETHOOTH302/Pinoutsettings_302.png)
+![Cube](../img/BLUETOOTH302/Pinoutsettings_302.png)
 下記のようにクロックを最大になるように、設定してください。
-![Cube](../img/BLUETHOOTH302/ClockConfigration302.png)
+![Cube](../img/BLUETOOTH302/ClockConfigration302.png)
 USART2,USART6を選択.
-![Cube](../img/BLUETHOOTH302/Configrarion302.png)
+![Cube](../img/BLUETOOTH302/Configrarion302.png)
 NVIC_SettingsでUSART2,USART6ともに有効にします。
-![Cube](../img/BLUETHOOTH302/NvicConfigration302.png)
+![Cube](../img/BLUETOOTH302/NvicConfigration302.png)
 DMAを選択し、UART2,UART6ともにADDします。
-![Cube](../img/BLUETHOOTH302/USART2Configration_302.png)
+![Cube](../img/BLUETOOTH302/USART2Configration_302.png)
 
 
 CodeGenerateします。
@@ -183,7 +183,7 @@ int main(void)
 ```
 
 TeraTermなどでファームウェアバージョンが表示されたら正常です。
-![Cube](../img/WIFI305/terminalcommand.png)
+![Cube](../img/BLUETOOTH302/BluetoothPC.png)
 
 ## 構成Parts
 -
