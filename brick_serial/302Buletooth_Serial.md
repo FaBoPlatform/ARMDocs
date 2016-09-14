@@ -25,7 +25,7 @@ USART2,USART6を選択.
 ![Cube](../img/BLUETOOTH302/Congfigrarion302.png)
 NVIC_SettingsでUSART2,USART6ともに有効にします。
 ![Cube](../img/BLUETOOTH302/NvicConfigration302.png)
-DMAを選択し、UART2,UART6ともにADDします。
+ConfigrationsでDMA Settigsを選択し、UART2,UART6ともにADDします。
 ![Cube](../img/BLUETOOTH302/USART2Configration_302.png)
 
 
