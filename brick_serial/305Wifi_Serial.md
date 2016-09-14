@@ -296,7 +296,7 @@ int main(void)
 
 リセットボタンを押すと起動します。
 Wifiに接続して、約２分ぐらいで表示されます。
-![Cube](../img/WIFI305/terminalcommand.png)
+![Cube](../img/WIFI305/Terminal305.png)
 
 ## 構成Parts
 -
