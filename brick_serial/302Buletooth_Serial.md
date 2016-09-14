@@ -184,6 +184,7 @@ int main(void)
 Macターミナルを起動（例）
 *******-iMac:~ ******$>screen /dev/tty.RNBT-********-RNI-SPP 115200を入力し。
 ターミナルから任意の入力。３２回目になるとバッファーがいっぱいになるので、下のように表示されます。
+USART6から入力されたキーは、USART2に送信され下記のように表示されます。
 
 USART2側
 ![Cube](../img/BLUETOOTH302/BluetoothPC.png)
