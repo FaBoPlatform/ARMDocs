@@ -189,7 +189,9 @@ USART2側
 ![Cube](../img/BLUETOOTH302/BluetoothPC.png)
 
 USART6側
+
 ![Cube](../img/BLUETOOTH302/MacConsole.png)
+
 TeraTermなどでファームウェアバージョンが表示されたら正常です。
 
 ## 構成Parts
