@@ -1,6 +1,6 @@
 # #305 Buletooth Serial Brick
 
-![Cube](../img/BLUETOOTH302/302.jpg)
+![Cube](../img/BLUETOOTH302/Connect305.jpg)
 <!--COLORME-->
 
 ## Overview
@@ -10,6 +10,7 @@ PCやスマートフォンなどの端末とシリアル通信することがで
 
 ## Connecting
 Wifi Brickは　Arduino D9,CN10 mopho pin 4pinに接続します。
+![Cube](../img/BLUETOOTH302/302.jpg)
 
 ###DMAによる通信
 DMAはＣＰＵを仲介せず直接メモリにアクセスしデータを送受信します。その間は、ＣＰＵは他の処理ができるようになりますが、DMAがバスを使用しますので制限があります。
