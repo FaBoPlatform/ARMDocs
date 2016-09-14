@@ -182,7 +182,7 @@ int main(void)
 
 ```
 Macターミナルを起動（例）
->screen /deb/tty.RNBT-********-RNI-SPP 115200を入力し。
+*******-iMac:~ ******$>screen /dev/tty.RNBT-********-RNI-SPP 115200を入力し。
 ターミナルから任意の入力。３２回目になるとバッファーがいっぱいになるので、下のように表示されます。
 
 USART2側
