@@ -103,10 +103,10 @@ UART2,UART6,DMA,NVICを設定します。
 ![Cube](../img/WIFI305/Configration305.png)
 
 confingration Nvic Settingsで有効にします。
-![Cube](../img/WIFI305/UART6Configration_NVIC.png)
+![Cube](../img/WIFI305/UART6Configration_NVIC_Settings.png)
 
 configaration DMA Settingsで有効にします。
-![Cube](../img/WIFI305/UART6Configration_DMA.png)
+![Cube](../img/WIFI305/UART6Configration_DMA_Settings.png)
 
 設定が終了したら、CodeGenerateします。コードが自動生成されます。
 
@@ -296,7 +296,7 @@ int main(void)
 
 リセットボタンを押すと起動します。
 Wifiに接続して、約２分ぐらいで表示されます。
-![Cube](../img/WIFI305/terminalcommmand.png)
+![Cube](../img/WIFI305/terminalcommand.png)
 
 ## 構成Parts
 -
