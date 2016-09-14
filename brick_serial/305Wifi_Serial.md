@@ -17,7 +17,7 @@ UART2はターミナルに表示。UART6をWifiBrick接続します。WifiBrick�
 ![Cube](../img/WIFI305/Pinout_Wifi.png)
 
 下記のようにクロックを最大になるように、設定してください。
-![Cube](../img/WIFI305/Pinout_Clock_Setting446.png)
+![Cube](../img/WIFI305/ClockConfigration_305.png)
 
 CodeGenerateします。
 下記のコードを追記します。
