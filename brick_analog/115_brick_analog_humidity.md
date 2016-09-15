@@ -1,6 +1,6 @@
 # #115 Humidity Brick
 
-<center>![](/img/100_analog/product/115.jpg)
+<center>![](../img/HUMIDITY115/115.jpg)
 <!--COLORME-->
 
 ## Overview
