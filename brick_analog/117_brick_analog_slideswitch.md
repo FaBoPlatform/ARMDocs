@@ -14,31 +14,9 @@ I/OピンよりスライドスイッチのON/OFFをデジタル値で取得で�
 
 A0コネクタにスイッチを接続し、D2にLEDを接続する。
 
+近日公開
 ```c
-#define switchPin A0 // スイッチピン
-#define ledPin 2 // LEDピン
 
-void setup() {
-  // スイッチピンを入力用に設定
-  pinMode(switchPin, INPUT);
-  // LEDピンを出力用に設定
-  pinMode(ledPin, OUTPUT);
-}
-
-int switchFlag = 0;
-
-void loop() {
-  // スイッチの値を取得
-  switchFlag = digitalRead(switchPin);
-
-  // スイッチがONならLEDをつける
-  if (switchFlag == HIGH) {
-    digitalWrite(ledPin, HIGH);
-  } else {
-    digitalWrite(ledPin, LOW);
-  }
-
-}
 ```
 
 ## 構成Parts

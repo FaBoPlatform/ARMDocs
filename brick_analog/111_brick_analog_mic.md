@@ -1,6 +1,8 @@
 # #111 Microphone Brick
 
 <center>![](/img/100_analog/product/111.jpg)
+開発中
+
 <!--COLORME-->
 
 ## Overview
