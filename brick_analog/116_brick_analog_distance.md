@@ -206,7 +206,7 @@ int main(void)
 ```
 
 TeraTermを起動し確認します。リセットボタンを押すと起動します。
-<center>![](../img/DISTANCE116/TeraTerm.png)
+<center>![](../img/DISTANCE116/TeraTerm116.png)
 
 
 ## 構成Parts
