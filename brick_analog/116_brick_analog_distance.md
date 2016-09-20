@@ -36,7 +36,7 @@ A0コネクタに接続して、距離を計測します。
 <center>![](../img/DISTANCE116/Clock_Configration.png)
 
 ADCを設定します。
-<center>![](../img/DISTANCE116/Configrtion_ADC.png)
+<center>![](../img/DISTANCE116/Configration_ADC.png)
 
 NVIC(割り込みコントローラ)をADCに対して有効化します。
 <center>![](../img/DISTANCE116/NVIC_Config.png)
