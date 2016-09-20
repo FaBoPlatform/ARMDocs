@@ -143,9 +143,11 @@ int main(void)
 	/* USER CODE END WHILE */
 		   while(adcFlag != 0){
 			 }
+       //取得した値を電圧に変換
 				double voltage = value * (3.3/4096);
 			 sprintf(buffer,"%fmV : ",voltage);
         HAL_UART_Transmit(&huart2,(uint8_t*)buffer,strlen(buffer),0x1111);
+        //近似値求める。
 			 double d;
 			if (voltage<0.4){
 				sprintf(buffer,"Unmeasurable\n\r");
