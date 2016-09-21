@@ -12,7 +12,7 @@ ARM開発するに必要なソフトウェアは、エディタ、コンパイ�
 | Segger | emIDE |
 | Code Red | RedSuite |
 | Raisonancec | Ride |
-| Altium | Tasking|
+| Altium | Tasking |
 | Cosmic | Idea |
 他多数
 
@@ -84,6 +84,9 @@ https://www.keil.com/download/product/
 MDK-ARMを選択する。
 ![MDK-ARM](../img/MDK-ARM.png)
 
+ユーザー登録する。 住所、名前などを登録してダウンロードする。
+![UserReg](../img/userTmp.png)
+
 keil5を起動。ターゲットとなるデバイスを選択する。
 下記のボタン（PackInstaller）を押します。
 ![InstallButton](../img/BoradPackInstall.jpg)
@@ -99,9 +102,6 @@ file:///C:/Keil_v5/ARM/PACK/ARM/CMSIS/5.0.0-Beta4/CMSIS/Documentation/Core/html/
 参考　CMSISの説明
 http://www.arm.com/ja/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php
 
-
-ユーザー登録する。 住所、名前などを登録してダウンロードする。
-![UserReg](../img/userTmp.png)
 
 ![InstallButton](../img/ManegerInstallButton.png)
 
