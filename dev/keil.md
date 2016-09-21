@@ -1,3 +1,4 @@
+##導入
 ARM開発するに必要なソフトウェアは、エディタ、コンパイラ、デバッカ、シュミレータなど複数必要ですが、IDE（統合開発環境）を使えば１つにまとまったソフトウェアとして提供されています。ARMマイコンを使用した開発が盛んになり開発環境もmbed,Keil,IAR,GCC利用のEclipseなどいくつかの選択肢がありますが、今回はARM社が開発したコンパイラが利用できるKeilで開発環境を構築します。eclipseなどは、コンパイラなども別にインストール必要がありますが、keilでコンパイル可能です。しかも、ARM社の純正コンパイラとなります。特徴として、mbedと異なりハードウェアに直接プログラミングでき、性能の追及やコードサイズがコンパクトになるベアメタルで開発可能となります。Keilの動作環境は、Windowsが必須となります。また、keilの無償版は32KBのコード制限があります。しかしながら、機能が単純な場合は十分な容量といえます。
 流れとしては、ドライバをインストール→Keilのインストール→ターゲットとなるボードの設定→必要なコンポーネントをインストール→書き込みの設定となります。
 
@@ -54,6 +55,7 @@ NUCLEO-F446REのドキュメント
 http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-f446re.html
 
 
+##インストールの準備、デバッカの選択
 開発者登録する。
 http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-f401re.html
 
@@ -84,6 +86,7 @@ MCUを検査するバウンダリングスキャンが可能でデイジーチ�
 | NRST | リセット |
 | SWO | データ出力（オプション） |
 
+##ST-LINKドライバーインストール
 ST-LINK/V2ドライバダウンロード
 
 http://www.st.com/content/st_com/ja/products/embedded-software/development-tool-software/stsw-link009.html
@@ -103,6 +106,8 @@ ST-LINK/V2のファームウェアをアップデートする。
 ![update](../img/update.png)
 
 NecleoをUSBポートに接続する。
+
+##Keilをインストール
 
 keil μVersion5のダウンロード
 https://www.keil.com/download/product/
