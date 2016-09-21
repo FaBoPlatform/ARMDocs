@@ -20,22 +20,37 @@ ARM開発するに必要なソフトウェアは、エディタ、コンパイ�
 
 
 NUCLEO-F401RE導入の場合　主なスペック
+
 Nucleo type:Nucleo64(High-performance)
+
 MCU:STM32F401RET6(ARM 32bit Cortex-M4)
+
 MCU pin:64
+
 Flash:512KB
+
 RAM:96KB
+
 Interface:SPI(3),I2S,I2C,USART(3),USB-OTG,SDIO(Secure Digital I/O)
+
 WDT(2),ADC(12bit/10ch),RTC(Real Time Clock),TIM
+
 GPIO:50
+
 Connectors(Arduino UNO Rev3,ST morpho)
 
 参考サイト
+
 NUCLEOラインナップ
+
 http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo.html?querycriteria=productId=LN1847
+
 NUCLEO-F401REのドキュメント
+
 http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-f401re.html
+
 NUCLEO-F446REのドキュメント
+
 http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-f446re.html
 
 
