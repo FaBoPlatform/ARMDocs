@@ -54,6 +54,9 @@ NUCLEO-F446REのドキュメント
 
 http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-f446re.html
 
+ARMマイコンのテクニカルドキュメント
+
+http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0363fj/I43478.html
 
 ##インストールの準備、デバッカの選択
 開発者登録する。
