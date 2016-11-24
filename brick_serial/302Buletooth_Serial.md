@@ -1,4 +1,4 @@
-# #305 Buletooth Serial Brick
+# #302 Buletooth Serial Brick
 
 ![Cube](../img/BLUETOOTH302/302.jpg)
 <!--COLORME-->
