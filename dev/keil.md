@@ -5,18 +5,18 @@ ARM開発するに必要なソフトウェアは、エディタ、コンパイ�
 
 主な開発環境
 
-| 開発元 | パッケージ名 |
-|:--|:--|
-| IAR | EWARM |
-| Keil | MDK |
-| Atolic | TrueStudio |
-| Rowley | CrossWorks |
-| Embest | CooCox |
-| Segger | emIDE |
-| Code Red | RedSuite |
-| Raisonancec | Ride |
-| Altium | Tasking |
-| Cosmic | Idea |
+| 開発元 | パッケージ名 | |
+|:--|:--|:--|
+| IAR | EWARM |IARシステムズ　評価版は３２Ｋコードサイズ期限なし制限版と３０日期限あり|
+| Keil | MDK |ARM社の純正コンパイラ　評価版はIARとほぼ同じ制限|
+| Atolic | TrueStudio |Eclipseを基にした製品　評価版は制限なし|
+| Rowley | CrossWorks ||
+| Embest | CooCox ||
+| Segger | emIDE |J-linkを使う場合|
+| Code Red | RedSuite ||
+| Raisonancec | Ride ||
+| Altium | Tasking ||
+| Cosmic | Idea ||
 
 他多数
 
