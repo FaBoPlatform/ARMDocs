@@ -135,11 +135,15 @@ keil5を起動。ターゲットとなるデバイスを選択する。
 
 参考 ARM KEIL Board Support
 file:///C:/Keil_v5/ARM/PACK/Keil/MDK-Middleware/7.0.0/Doc/Board/html/index.html
+CMSIS-CORE
+ＡＲＭコアはさまざまなメーカーに搭載されていますが、ソフトウェアは各社相違があったのですがARM社が定義した共通規格です。各社ペリフェラルなどは、各社でレジスタを定義していたのですが、CMSISの中のCOREは、ARMコアとつながるペリフェラルにたいしてレジスタを定義しております。
 参考　CMSIS-CORE
 file:///C:/Keil_v5/ARM/PACK/ARM/CMSIS/5.0.0-Beta4/CMSIS/Documentation/Core/html/index.html
 参考　CMSISの説明
 http://www.arm.com/ja/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php
-
+CMSIS-DAP
+CMSIS-DAPは、ARM社が提唱するデバッカの定義。
+CMSIS-PACKは、CORE,DAP,DSP,SVDなど各ライブラリをまとめたパッケージです。
 
 ![InstallButton](../img/ManegerInstallButton.png)
 
