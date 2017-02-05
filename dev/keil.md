@@ -1,12 +1,15 @@
+#Keil
 ##豊富な統合開発環境IDE
 
-ARM開発するに必要なソフトウェアは、エディタ、コンパイラ、デバッカ、シュミレータなど複数必要ですが、IDE（統合開発環境）を使えば１つにまとまったソフトウェアとして提供されています。ARMマイコンを使用した開発が盛んになり開発環境もmbed,Keil,IAR,GCC利用のEclipseなどいくつかの選択肢がありますが、今回はARM社が開発したコンパイラが利用できるKeilで開発環境を構築します。オープンソースのeclipseなどは、コンパイラなども別にインストールし組み合わせて使用する必要がありますが、keilだけでコンパイル、書き込み可能で、コンポーネントなどインストールも簡単におこなえます。しかも、実行速度が速いARM社の純正コンパイラとなります。特徴として、mbedと異なりハードウェアに直接プログラミングでき、性能の追及やコードサイズがコンパクトになるベアメタルで開発可能となります。よってＯＳがない状態で実行します。したがって、デバイスドライバ、ライブラリを使い、割り込み処理などはコードを記述しないてはいけません。しかしながら、コンポーネントをインストールするのには、Keilはとても分かりやすくなっております。
+ARM開発するに必要なソフトウェアは、エディタ、コンパイラ、デバッカ、シュミレータなど複数必要ですが、IDE（統合開発環境）を使えば１つにまとまったソフトウェアとして提供されています。ARMマイコンを使用した開発が盛んになり開発環境もmbed,Keil,IAR,GCC利用のEclipseなどいくつかの選択肢がありますが、今回はARM社が開発したコンパイラが利用できるKeilで開発環境を構築します。オープンソースのeclipseなどは、コンパイラなども別にインストールし組み合わせて使用する必要がありますが、keilだけでコンパイル、書き込み可能で、コンポーネントなどインストールも簡単におこなえます。しかも、実行速度が速いARM社の純正コンパイラとなります。特徴として、mbedと異なりハードウェアに直接プログラミングでき、性能の追及やコードサイズがコンパクトになるベアメタルで開発可能となります。よってＯＳがない状態で実行します。したがって、デバイスドライバ、ライブラリを使い、割り込み処理などはコードを記述しないてはいけません。しかしながら、Keilを使えば、コンポーネントをインストールするのには、とても分かりやすくなっております。
 
+###動作環境
 Keilの動作環境は、現在、Windowsが必須となります。keilの無償版は32KBのコード制限があります。しかしながら、機能が単純な場合は十分な容量といえます。
+
 
 流れとしては、ドライバをインストール→Keilのインストール→ターゲットとなるボードの設定→必要なコンポーネントをインストール→書き込みの設定となります。
 
-主な開発環境
+###主な開発環境
 
 | 開発元 | パッケージ名 | |
 |:--|:--|:--|
@@ -19,48 +22,11 @@ Keilの動作環境は、現在、Windowsが必須となります。keilの無�
 | Code Red | RedSuite ||
 | Raisonancec | Ride ||
 | Altium | Tasking ||
-| Cosmic | Idea ||
+| Cosmic | Idea | |
+
 
 他多数
 
-
-NUCLEO-F401RE導入の場合　主なスペック
-
-Nucleo type:Nucleo64(High-performance)
-
-MCU:STM32F401RET6(ARM 32bit Cortex-M4)
-
-MCU pin:64
-
-Flash:512KB
-
-RAM:96KB
-
-Interface:SPI(3),I2S,I2C,USART(3),USB-OTG,SDIO(Secure Digital I/O)
-
-WDT(2),ADC(12bit/10ch),RTC(Real Time Clock),TIM
-
-GPIO:50
-
-Connectors(Arduino UNO Rev3,ST morpho)
-
-参考サイト
-
-NUCLEOラインナップ
-
-http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo.html?querycriteria=productId=LN1847
-
-NUCLEO-F401REのドキュメント
-
-http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-f401re.html
-
-NUCLEO-F446REのドキュメント
-
-http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-f446re.html
-
-ARMマイコンのテクニカルドキュメント
-
-http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0363fj/I43478.html
 
 ##インストールの準備、デバッカについて
 開発者登録する。
@@ -68,11 +34,14 @@ http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation
 
 ![Top](../img/F401Top.png)
 
+###デバック方法
 
-通常、ARM開発には、Keilなどの開発用ソフトウェア以外にも、ターゲットとなるCPUを制御してボードのメモリにファームウェアをダウンロードするJTAGエミュレータが必要になります。ARM開発において、JTAGエミュレータ（デバッガ,プログラミングツール）は約５万円～数十万円J-linkシリーズやUlink（使用するマイコンやIDEによって必要とされるものは変わります）などよく使われますが、Necleoは、ファームウェアを書き込む（ダウンロード）ST-LINKデバッガ（ICE）を搭載済みで完成したら切り離すことが可能になっており、別途購入不要です。ST-LinkとターゲットとなるマイコンはSWD(SerialWireDebug)インターフェースで接続されている。JTAG５本線の信号線が必要ですが、省スペース化に対応したSWDは、信号線最低限２本(SWCLK,SWDIO)でボードにダウンロード可能です。信号線の他には電源とグランドとなる。
+STM32には開発にはいくつか豊富があります。JTAG並びにSWDを使った方法、USBを使うのも、UARTを使用するのものです。ここではデバックに優れているSWDを紹介します。
+
+通常、ARM開発には、Keilなどの開発用ソフトウェア以外にも、ターゲットとなるCPUを制御してボードのメモリにファームウェアをダウンロードするJTAGエミュレータが必要になります。ARM開発において、JTAGエミュレータ（デバッガ,プログラミングツール）は約５万円～数十万円J-linkシリーズやUlink（使用するマイコンやIDEによって必要とされるものは変わります）などよく使われますが、Necleoは、ファームウェアを書き込む（ダウンロード）ST-LINKデバッガ（ICE）を搭載済みで完成したら切り離すことが可能になっており、別途購入不要です。また、別売りのプログラマも安価に販売されています。ST-LinkとターゲットとなるマイコンはSWD(SerialWireDebug)インターフェースで接続されている。JTAG５本線の信号線が必要ですが、省スペース化に対応したSWDは、信号線最低限２本(SWCLK,SWDIO)でボードにダウンロード可能です。信号線の他には電源とグランドとなる。JTAGとSWDどちらもプログラムの書き換え、マイコン内の（プログラムの進行状況、変数の状態）を確認することできる。
 
 ##JTAG　
-４本から５本必要。
+４本から５本必要。工場などで基板を検査する規格がデバックにつかわれるようになった。
 MCUを検査するバウンダリングスキャンが可能でデイジーチェーンにより複数台同時接続が可能。
 
 | pin |  |
@@ -84,7 +53,7 @@ MCUを検査するバウンダリングスキャンが可能でデイジーチ�
 | TDO | データ出力 |
 
 ##SWD
-少なくても２本(SWCLK,SWDIO)必要。トレース機能を利用したい場合はSWOを追加します。
+JTAGをシンプルにしてデバックに特化している。少なくても２本(SWCLK,SWDIO)必要。トレース機能を利用したい場合はSWOを追加します。
 
 | pin |  |
 |:--|:--|
@@ -129,8 +98,8 @@ keil5を起動。ターゲットとなるデバイスを選択する。
 下記のボタン（PackInstaller）を押します。
 ![InstallButton](../img/BoradPackInstall.jpg)
 
-メニューバーのProjectを選択。次にSTmicroelectronics→STM32F401→STM32F401RB→STM32F401RBを選択します。
-必要となるコンポーネントを選択する。
+メニューバーのProjectを選択。次にターゲットを選択しSTmicroelectronics→STM32F401→STM32F401RB→STM32F401RBを選択します。
+必要となるPackを選択（Install）する。
 ![Ｋｅｉｌ設定画面](../img/Keil_Soc_Select.jpg)
 
 参考 ARM KEIL Board Support

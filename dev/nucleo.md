@@ -41,6 +41,48 @@ Arduino Nano互換のPinヘッダーを搭載するNucleo-32とArduino Uno互換
 
 最適なモデルを選びましょう。
 
+###スペックを確認
+今回使用するボードの主なスペックです。ここでは、コストパフォーマンスにすぐれたNUCLEO-F401RE,NUCLEO-F446REを取り上げています。
+
+###NUCLEO-F401RE
+
+Nucleo type:Nucleo64(High-performance)
+
+MCU:STM32F401RET6(ARM 32bit Cortex-M4)
+
+MCU pin:64
+
+Flash:512KB
+
+RAM:96KB
+
+Interface:SPI(3),I2S,I2C,USART(3),USB-OTG,SDIO(Secure Digital I/O)
+
+WDT(2),ADC(12bit/10ch),RTC(Real Time Clock),TIM
+
+GPIO:50
+
+Connectors(Arduino UNO Rev3,ST morpho)
+
+参考サイト
+
+NUCLEOラインナップ
+
+http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo.html?querycriteria=productId=LN1847
+
+NUCLEO-F401REのドキュメント
+
+http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-f401re.html
+
+NUCLEO-F446REのドキュメント
+
+http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-f446re.html
+
+ARMマイコンのテクニカルドキュメント
+
+http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0363fj/I43478.html
+
+
 
 ### Nucleo-32
 * [NUCLEO-L011K4](http://www.st.com/content/st_com/ja/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo/nucleo-l011k4.html)
