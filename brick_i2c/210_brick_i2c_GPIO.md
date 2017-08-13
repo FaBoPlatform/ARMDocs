@@ -109,15 +109,15 @@ int main(void)
   MX_I2C1_Init();
 
   /* USER CODE BEGIN 2 */
-  //命令
+  //レジスタ 0x00 入力　0x01 出力 0x03 IOの設定
 	uint16_t cmd[4] = {0x00,0x01,0x02,0x03};
   //LEDの光らすパターン
 	uint8_t patern[9] = {0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
 	HAL_Delay(100);
-  //GPIO入出力設定
+  //PCAL6408の入出力設定
 	I2cWrite(cmd[3],patern);
 	HAL_Delay(100);
-  //LEDを順番に光らす
+  //LEDを順番に点灯、消灯させる
   while (1)
   {
 		for(int j=0;j<9;j++){
