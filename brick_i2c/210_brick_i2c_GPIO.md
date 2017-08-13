@@ -11,7 +11,7 @@ I2Cで8個のLEDを制御できます。
 ## Connecting
 GPIO210 BrickをI2C1_SCL	PB6、I2C1_SDA	PB7に接続します。
 
-###CubeMXの設定
+### CubeMXの設定
 CubeMXを立ち上げ、New Projectを選択します。
 ![Cube](../img/GPIO210/Fabo210_CubeMX_Select.png)
 
